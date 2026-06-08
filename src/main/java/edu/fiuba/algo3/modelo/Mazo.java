@@ -37,6 +37,7 @@ public class Mazo {
         return cartas.size();
     }
 
+
     public void repartir(List<Jugador> jugadores){
 
         Collections.shuffle(cartas); /* mezcla las cartas */

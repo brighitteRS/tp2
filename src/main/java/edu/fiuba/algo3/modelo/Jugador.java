@@ -13,8 +13,19 @@ public class Jugador {
         this.rol = rol;
     }
 
-    public boolean Rol tieneRolAsignado() {
+    public boolean tieneRolAsignado() {
         return rol != null;
+    }
+
+    public Bando consultarBando(Jugador solicitante){
+
+        if (solicitante == this){
+            return rol.revelarBando();
+        }
+        return rol.revelarBandoA(solicitante);
+    }
+    public boolean esDeLaMafia(){
+        return rol.esDeLaMafia();
     }
 
 

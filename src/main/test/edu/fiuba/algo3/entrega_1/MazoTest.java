@@ -36,7 +36,7 @@ public class MazoTest {
 
         for (Jugador jugador : jugadores) {
 
-            assertNotNull(jugador.getRol());
+            assertTrue(jugador.tienRolAsignado());
         }
     }
 }

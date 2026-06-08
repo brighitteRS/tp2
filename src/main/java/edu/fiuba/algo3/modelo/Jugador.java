@@ -9,12 +9,12 @@ public class Jugador {
         this.nombre = nombre;
     }
 
-    public void setRol(Rol rol){
+    public void asignarRol(Rol rol){
         this.rol = rol;
     }
 
-    public Rol getRol() {
-        return rol;
+    public boolean Rol tieneRolAsignado() {
+        return rol != null;
     }
 
 

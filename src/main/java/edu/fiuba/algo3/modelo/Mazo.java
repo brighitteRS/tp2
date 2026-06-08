@@ -43,7 +43,7 @@ public class Mazo {
 
         for (int i=0; i< jugadores.size(); i++){
 
-            jugadores.get(i).setRol(cartas.get(i));
+            jugadores.get(i).asignarRol(cartas.get(i));
 
         }
 

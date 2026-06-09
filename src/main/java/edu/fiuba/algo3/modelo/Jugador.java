@@ -2,11 +2,13 @@ package edu.fiuba.algo3.modelo;
 
 public class Jugador {
 
-    private String nombre;
+    private final String nombre;
     private Rol rol;
+    private boolean vivo;
 
     public Jugador(String nombre){
         this.nombre = nombre;
+        this.vivo = true;
     }
 
     public void asignarRol(Rol rol){
@@ -24,9 +26,16 @@ public class Jugador {
         }
         return rol.revelarBandoA(solicitante);
     }
+
     public boolean esDeLaMafia(){
         return rol.esDeLaMafia();
     }
 
+    public boolean estaVivo() {
+        return vivo;
+    }
 
+    public void eliminar() {
+        vivo = false;
+    }
 }

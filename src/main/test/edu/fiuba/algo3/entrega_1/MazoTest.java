@@ -98,7 +98,4 @@ public class MazoTest {
         assertNotNull(bandoComplice);
         assertNull(bandoCiudadano);
     }
-
-
-
 }

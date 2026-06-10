@@ -1,12 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 public class Mafioso extends Rol implements ActorNocturno{
+
     private Jugador victima;
-
-    public void elegirVictima(Jugador objetivo) {
-        this.victima = objetivo;
-    }
-
     public Mafioso(){
         super(new BandoMafia());
     }
@@ -23,4 +19,14 @@ public class Mafioso extends Rol implements ActorNocturno{
     public void actuarNoche(FaseNocturna fase) {
         fase.registrarVictimaMafia(victima);
     }
+
+    @Override
+    public void elegirVictima(Jugador victima){
+
+        if(!victima.puedeSerVictima()){
+            throw  new IllegalArgumentException();
+        }
+        this.victima = victima;
+    }
+
 }

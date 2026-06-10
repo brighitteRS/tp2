@@ -8,90 +8,105 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FaseNocturnaTest {
 
     @Test
-    public void laMafiaPuedeSeleccionarUnaVictimaValida() {
+    public void test05laMafiaPuedeSeleccionarUnaVictimaValida() {
 
-        Jugador ciudadano = new Jugador("Ciudadano");
-        ciudadano.asignarRol(new Ciudadano());
+        // Arrange
+        Jugador jugador1 = new Jugador("Jugador 1");
+        jugador1.asignarRol(new Ciudadano());
 
-        Mafioso mafioso = new Mafioso();
+        Jugador jugador2 = new Jugador("Jugador 2");
+        jugador2.asignarRol(new Mafioso());
 
         FaseNocturna fase = new FaseNocturna();
 
-        mafioso.elegirVictima(ciudadano);
-        mafioso.actuarNoche(fase);
+        //act
+        jugador2.elegirVictima(jugador1);
+        jugador2.ejecutarAccionNocturna(fase);
+        fase.ejecutar();
 
-        assertEquals(ciudadano, fase.obtenerVictimaMafia());
+        //assert
+        assertFalse(jugador1.estaVivo());
     }
 
     @Test
-    public void laMafiaNoPuedeSeleccionarJugadorMuertoOMafioso() {
+    public void test06laMafiaNoPuedeSeleccionarJugadorMuertoOMafioso() {
 
-        Jugador muerto = new Jugador("Muerto");
-        muerto.asignarRol(new Ciudadano());
-        muerto.eliminar();
+        // arrange
+        Jugador jugador1 = new Jugador("Jugador 1");
+        jugador1.asignarRol(new Ciudadano());
+        jugador1.eliminar();
 
-        Jugador otroMafiosoJugador = new Jugador("OtroMafioso");
-        otroMafiosoJugador.asignarRol(new Mafioso());
+        Jugador jugador2 = new Jugador("Jugador 2");
+        jugador2.asignarRol(new Mafioso());
 
-        Mafioso mafioso = new Mafioso();
+        Jugador jugador3 = new Jugador("Jugador 3");
+        jugador3.asignarRol(new Mafioso());
 
-        FaseNocturna fase = new FaseNocturna();
+        //act y assert
+        assertThrows(IllegalArgumentException.class, () ->
+            jugador2.elegirVictima(jugador1));
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            mafioso.elegirVictima(muerto);
-            mafioso.actuarNoche(fase);
-        });
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            mafioso.elegirVictima(otroMafiosoJugador);
-            mafioso.actuarNoche(fase);
-        });
+        assertThrows(IllegalArgumentException.class, () ->
+            jugador2.elegirVictima(jugador3));
+
     }
 
     @Test
-    public void elMedicoSalvaAlJugadorAtacadoPorLaMafia() {
+    public void test07elMedicoSalvaAlJugadorAtacadoPorLaMafia() {
 
-        Jugador victima = new Jugador("Victima");
-        victima.asignarRol(new Ciudadano());
+        // arrange
+        Jugador jugador1 = new Jugador("Jugador 1");
+        jugador1.asignarRol(new Ciudadano());
 
-        Mafioso mafioso = new Mafioso();
-        Medico medico = new Medico();
+        Jugador jugador2 = new Jugador("Jugador 2");
+        jugador2.asignarRol(new Mafioso());
+
+        Jugador jugador3 = new Jugador("Jugador 3");
+        jugador3.asignarRol(new Medico());
 
         FaseNocturna fase = new FaseNocturna();
 
-        mafioso.elegirVictima(victima);
-        medico.elegirProtegido(victima);
+        // act
+        jugador2.elegirVictima(jugador1);
+        jugador3.elegirProtegido(jugador1);
 
-        mafioso.actuarNoche(fase);
-        medico.actuarNoche(fase);
+        jugador2.ejecutarAccionNocturna(fase);
+        jugador3.ejecutarAccionNocturna(fase);
 
         fase.ejecutar();
 
-        assertTrue(victima.estaVivo());
+        //assert
+        assertTrue(jugador1.estaVivo());
     }
 
     @Test
-    public void laMafiaEliminaAlJugadorSiNoEstaProtegido() {
+    public void test08laMafiaEliminaAlJugadorSiNoEstaProtegido() {
 
-        Jugador victima = new Jugador("Victima");
-        victima.asignarRol(new Ciudadano());
+        //arrange
+        Jugador jugador1 = new Jugador("Jugador 1");
+        jugador1.asignarRol(new Ciudadano());
 
-        Jugador otro = new Jugador("Otro");
-        otro.asignarRol(new Ciudadano());
+        Jugador jugador2 = new Jugador("Jugador 2");
+        jugador2.asignarRol(new Ciudadano());
 
-        Mafioso mafioso = new Mafioso();
-        Medico medico = new Medico();
+        Jugador jugador3 = new Jugador("Jugador 3");
+        jugador3.asignarRol(new Mafioso());
+
+        Jugador jugador4 = new Jugador("Jugador 4");
+        jugador4.asignarRol(new Medico());
 
         FaseNocturna fase = new FaseNocturna();
 
-        mafioso.elegirVictima(victima);
-        medico.elegirProtegido(otro);
+        jugador3.elegirVictima(jugador1);
+        jugador4.elegirProtegido(jugador2);
 
-        mafioso.actuarNoche(fase);
-        medico.actuarNoche(fase);
+        jugador3.ejecutarAccionNocturna(fase);
+        jugador4.ejecutarAccionNocturna(fase);
 
         fase.ejecutar();
 
-        assertFalse(victima.estaVivo());
+        assertFalse(jugador1.estaVivo());
+        assertTrue(jugador2.estaVivo());
     }
 }

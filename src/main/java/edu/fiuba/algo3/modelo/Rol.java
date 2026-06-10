@@ -16,4 +16,13 @@ public abstract class Rol {
     public boolean esDeLaMafia() {
         return bando instanceof BandoMafia;
     }
+
+    public void elegirVictima(Jugador victima){
+    }
+
+    public void elegirProtegido(Jugador protegido) {
+    }
+
+
+
 }

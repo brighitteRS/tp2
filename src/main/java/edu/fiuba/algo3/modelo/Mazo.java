@@ -19,8 +19,8 @@ public class Mazo {
                 cartas.add(new Ciudadano());
             }
         }
-
     }
+
     public int contarRolesDe(Class<?> tipo){
 
         int contador = 0;
@@ -37,7 +37,6 @@ public class Mazo {
         return cartas.size();
     }
 
-
     public void repartir(List<Jugador> jugadores){
 
         Collections.shuffle(cartas); /* mezcla las cartas */
@@ -47,8 +46,5 @@ public class Mazo {
             jugadores.get(i).asignarRol(cartas.get(i));
 
         }
-
-
     }
-
 }

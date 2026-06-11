@@ -6,12 +6,12 @@ public class Jugador {
     private Rol rol;
     private boolean vivo;
 
-    public Jugador(String nombre){
+    public Jugador(String nombre) {
         this.nombre = nombre;
         this.vivo = true;
     }
 
-    public void asignarRol(Rol rol){
+    public void asignarRol(Rol rol) {
         this.rol = rol;
     }
 
@@ -19,16 +19,12 @@ public class Jugador {
         return rol != null;
     }
 
-    public Bando consultarBando(Jugador solicitante){
+    public Bando consultarBando(Jugador solicitante) {
 
-        if (solicitante == this){
+        if (solicitante == this) {
             return rol.revelarBando();
         }
         return rol.revelarBandoA(solicitante);
-    }
-
-    public boolean esDeLaMafia(){
-        return rol.esDeLaMafia();
     }
 
     public boolean estaVivo() {
@@ -38,4 +34,28 @@ public class Jugador {
     public void eliminar() {
         vivo = false;
     }
+
+    public boolean puedeSerVictima() {
+        return vivo && !rol.esDeLaMafia(); //se lo pregunta asi mismo
+    }
+
+    public void elegirVictima(Jugador victima) {
+        rol.elegirVictima(victima);
+    }
+
+    public boolean esDeLaMafia() {
+        return rol.esDeLaMafia();
+    }
+
+    public void ejecutarAccionNocturna(FaseNocturna fase) {
+        if (rol instanceof ActorNocturno) {
+            ((ActorNocturno) rol).actuarNoche(fase); //solo lo ejecuta si es un actor nocturno
+        }
+    }
+
+    public void elegirProtegido(Jugador protegido) {
+        rol.elegirProtegido(protegido);
+    }
+
+
 }

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-public class Ciudadano extends Rol{
+public class Ciudadano extends Rol {
     public Ciudadano() {
         super(new BandoCiudadano());
     }

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -44,11 +45,11 @@ public class FaseNocturnaTest {
 
         //act y assert
         assertThrows(IllegalArgumentException.class, () ->
-            jugador2.elegirVictima(jugador1));
+                jugador2.elegirVictima(jugador1));
 
 
         assertThrows(IllegalArgumentException.class, () ->
-            jugador2.elegirVictima(jugador3));
+                jugador2.elegirVictima(jugador3));
 
     }
 

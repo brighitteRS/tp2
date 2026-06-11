@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-public class Medico extends Rol implements ActorNocturno{
+public class Medico extends Rol implements ActorNocturno {
     private Jugador protegido;
 
     public Medico() {

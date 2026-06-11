@@ -6,12 +6,12 @@ public class Jugador {
     private Rol rol;
     private boolean vivo;
 
-    public Jugador(String nombre){
+    public Jugador(String nombre) {
         this.nombre = nombre;
         this.vivo = true;
     }
 
-    public void asignarRol(Rol rol){
+    public void asignarRol(Rol rol) {
         this.rol = rol;
     }
 
@@ -19,9 +19,9 @@ public class Jugador {
         return rol != null;
     }
 
-    public Bando consultarBando(Jugador solicitante){
+    public Bando consultarBando(Jugador solicitante) {
 
-        if (solicitante == this){
+        if (solicitante == this) {
             return rol.revelarBando();
         }
         return rol.revelarBandoA(solicitante);
@@ -35,7 +35,7 @@ public class Jugador {
         vivo = false;
     }
 
-    public boolean puedeSerVictima(){
+    public boolean puedeSerVictima() {
         return vivo && !rol.esDeLaMafia(); //se lo pregunta asi mismo
     }
 

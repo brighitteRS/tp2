@@ -17,12 +17,11 @@ public abstract class Rol {
         return bando instanceof BandoMafia;
     }
 
-    public void elegirVictima(Jugador victima){
+    public void elegirVictima(Jugador victima) {
     }
 
     public void elegirProtegido(Jugador protegido) {
     }
-
 
 
 }

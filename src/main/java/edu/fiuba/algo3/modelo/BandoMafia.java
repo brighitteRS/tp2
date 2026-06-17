@@ -6,4 +6,9 @@ public class BandoMafia implements Bando {
     public String obtenerNombre() {
         return "Mafia";
     }
+
+    @Override
+    public boolean esMafia() {
+        return true;
+    }
 }

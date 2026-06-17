@@ -1,21 +1,26 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Mazo.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.anyList;
 
 
 public class MazoTest {
 
     @Test
-    public void test01MazoConSeisJugadoresTieneCamposicionCorrecta() {
+    public void test01MazoConSeisJugadoresTieneComposicionCorrecta() {
 
         // Arrange
-        Mazo mazo = new Mazo(6);
+        Mazo mazo = Mazo.crear(6, new Aleatorio());
 
         // Act
         long mafiosos = mazo.contarRolesDe(Mafioso.class);
@@ -28,40 +33,52 @@ public class MazoTest {
         assertEquals(1, especiales);
         assertEquals(4, ciudadanos);
         assertEquals(6, total);
-
     }
 
     @Test
-    public void test02CadaJugadorRecibeUnRol(){
+    public void test02VerificarQueElRepartoDeCartasSeaAleatorio() {
 
-        // Arrgange
-        Mazo mazo = new Mazo(6);
-        List<Jugador> jugadores = new ArrayList<>();
-        for (int i=0; i < 6; i++){
+        // Arrange
+        List<Rol> cartas = new ArrayList<>();
+        cartas.add(new Mafioso());
+        cartas.add(new Detective());
+        cartas.add(new Ciudadano());
+        cartas.add(new Ciudadano());
+        cartas.add(new Ciudadano());
+        cartas.add(new Ciudadano());
 
-            jugadores.add(new Jugador("Jugador" + 1));
-        }
+        List<Rol> copia = new ArrayList<>(cartas);
+
+        // Act
+        new Aleatorio().mezclar(copia);
+
+        // Assert
+        assertNotEquals(cartas, copia);
+    }
+
+    @Test
+    public void test02CadaJugadorRecibeUnRol() {
+
+        // Arrange
+        Mazo mazo = Mazo.crear(6, new Aleatorio());
+        List<Jugador> jugadores = crearJugadores(6);
 
         // Act
         mazo.repartir(jugadores);
 
         // Assert
         for (Jugador jugador : jugadores) {
-
             assertTrue(jugador.tieneRolAsignado());
         }
     }
 
+//Este test debemos revisarlo
     @Test
-    public void test03JugadorSoloPuedeVerSuPropioRol(){
+    public void test03JugadorSoloPuedeVerSuPropioRol() {
 
-        // Arrage
-        Mazo mazo = new Mazo(6);
-        List<Jugador> jugadores = new ArrayList<>();
-
-        jugadores.add(new Jugador("Jugador " + 1));
-        jugadores.add(new Jugador("Jugador " + 2));
-
+        // Arrange
+        Mazo mazo = Mazo.crear(6, new Aleatorio());
+        List<Jugador> jugadores = crearJugadores(6);
         mazo.repartir(jugadores);
 
         Jugador jugador1 = jugadores.get(0);
@@ -74,28 +91,41 @@ public class MazoTest {
         // Assert
         assertNotNull(bandoPropio);
         assertNull(bandoAjeno);
-
     }
-
+    
     @Test
-    public void test04MafiososSeConocenEntreEllos(){
+    public void test04MafiososSeConocenEntreEllos() {
 
-        // arrgange
-        Jugador jugador1 = new Jugador("Jugador 1");
-        Jugador jugador2 = new Jugador("Jugador 2");
-        Jugador jugador3 = new Jugador("Jugador 3");
+        // Arrange
+        Mazo mazo = Mazo.crear(7, new Aleatorio());
+        List<Jugador> jugadores = crearJugadores(7);
 
-        jugador1.asignarRol(new Mafioso());
-        jugador2.asignarRol(new Mafioso());
-        jugador3.asignarRol(new Ciudadano());
+        // Act
+        Partida partida = new Partida(jugadores, mazo);
 
-        //Act
+        List<Jugador> mafiosos = jugadores.stream()
+                .filter(Jugador::esDeLaMafia)
+                .collect(Collectors.toList());
+        Jugador noMafioso = jugadores.stream()
+                .filter(j -> !j.esDeLaMafia())
+                .findFirst().get();
 
-        Bando bandoComplice = jugador1.consultarBando(jugador2);
-        Bando bandoCiudadano = jugador1.consultarBando(jugador3);
-
-        // assert
-        assertNotNull(bandoComplice);
-        assertNull(bandoCiudadano);
+        // Assert
+        assertTrue(mafiosos.get(0).esComplice(mafiosos.get(1)));
+        assertFalse(mafiosos.get(0).esComplice(noMafioso));
     }
+
+    private List<Jugador> crearJugadores(int cantidad) {
+        List<Jugador> jugadores = new ArrayList<>();
+        for (int i = 0; i < cantidad; i++) {
+            jugadores.add(new Jugador());
+        }
+        return jugadores;
+    }
+
 }
+
+
+
+
+

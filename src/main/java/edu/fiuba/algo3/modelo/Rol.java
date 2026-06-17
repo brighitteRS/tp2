@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.List;
+
 public abstract class Rol {
     private Bando bando;
 
@@ -17,12 +19,16 @@ public abstract class Rol {
         return bando instanceof BandoMafia;
     }
 
-    public void elegirVictima(Jugador victima){
+    public void elegirVictima(Jugador victima) {
     }
 
     public void elegirProtegido(Jugador protegido) {
     }
 
+    public void reconocerComplices(List<Jugador> complices) {}
 
+    public boolean esComplice(Jugador jugador) {
+        return false;
+    }
 
 }

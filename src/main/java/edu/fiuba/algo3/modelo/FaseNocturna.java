@@ -7,10 +7,10 @@ public class FaseNocturna {
 
     public void registrarVictimaMafia(Jugador objetivo) {
 
-       if (!objetivo.estaVivo() || objetivo.esDeLaMafia()) {
-                throw new IllegalArgumentException();
-            }
-            victimaMafia = objetivo;
+        if (!objetivo.estaVivo() || objetivo.esDeLaMafia()) {
+            throw new IllegalArgumentException();
+        }
+        victimaMafia = objetivo;
     }
 
     public void registrarProteccion(Jugador objetivo) {

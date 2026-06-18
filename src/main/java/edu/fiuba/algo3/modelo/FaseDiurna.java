@@ -32,7 +32,7 @@ public class FaseDiurna {
         }
 
         Jugador eliminado = ganadores.get(0);
-        eliminado.eliminar();
+        eliminado.cambiarEstado(new Muerto());
         return eliminado;
     }
 

@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.Ciudadano;
+import edu.fiuba.algo3.modelo.Roles.Ciudadano;
 import edu.fiuba.algo3.modelo.FaseDiurna;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Mafioso;
+import edu.fiuba.algo3.modelo.Roles.Mafioso;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 import org.junit.jupiter.api.Test;
 
@@ -18,11 +18,11 @@ public class FaseDiurnaTest {
     public void test01SeEliminaAlJugadorMasVotado() {
 
         // Arrange
-        Jugador jugadorAeliminar = new Jugador("j1", new Mafioso(), true);
-        Jugador jugador2 = new Jugador("j2", new Ciudadano(), true);
-        Jugador jugador3 = new Jugador("j3", new Ciudadano(), true);
-        Jugador jugador4 = new Jugador("j4", new Ciudadano(), true);
-        Jugador jugador5 = new Jugador("j5", new Ciudadano(), true);
+        Jugador jugadorAeliminar = new Jugador(new Mafioso());
+        Jugador jugador2 = new Jugador(new Ciudadano());
+        Jugador jugador3 = new Jugador(new Ciudadano());
+        Jugador jugador4 = new Jugador(new Ciudadano());
+        Jugador jugador5 = new Jugador(new Ciudadano());
 
         List<Jugador> candidatos = new ArrayList<>();
         candidatos.add(jugadorAeliminar);
@@ -48,8 +48,8 @@ public class FaseDiurnaTest {
     @Test
     public void test02SiEmpatanEnLaVotacionSeCancelaLaEliminacion() {
         // Arrange
-        Jugador jugador1 = new Jugador("j1", new Mafioso(), true);
-        Jugador jugador2 = new Jugador("j2", new Ciudadano(), true);
+        Jugador jugador1 = new Jugador(new Mafioso());
+        Jugador jugador2 = new Jugador(new Ciudadano());
 
         List<Jugador> candidatos = new ArrayList<>();
         candidatos.add(jugador1);

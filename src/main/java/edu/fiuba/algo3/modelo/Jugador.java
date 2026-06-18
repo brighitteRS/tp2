@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Urna.Urna;
+
 public class Jugador {
 
     private final String nombre;
@@ -11,6 +13,16 @@ public class Jugador {
         this.vivo = true;
     }
 
+    public Jugador(String nombre, Rol rol) {
+        this.nombre = nombre;
+        this.rol = rol;
+    }
+
+    public Jugador(String nombre, Rol rol, Boolean vivo) {
+        this.nombre = nombre;
+        this.rol = rol;
+        this.vivo = vivo;
+    }
     public void asignarRol(Rol rol) {
         this.rol = rol;
     }
@@ -31,8 +43,9 @@ public class Jugador {
         return vivo;
     }
 
-    public void eliminar() {
+    public Jugador eliminar() {
         vivo = false;
+        return this;
     }
 
     public boolean puedeSerVictima() {
@@ -57,5 +70,16 @@ public class Jugador {
         rol.elegirProtegido(protegido);
     }
 
+    public void nominar( Urna urna, Jugador nuevoCandidato ) {
+        urna.agregarCandidato(nuevoCandidato);
+    }
+
+    public void votar(Urna urna, Jugador votado) {
+        urna.registrarVoto(this, votado);
+    }
+
+    public Rol revelarRol() {
+        return rol;
+    }
 
 }

@@ -1,8 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Urna.Urna;
+
 public class Jugador {
 
-    private Rol rol;
+    private final Rol rol;
     private EstadoJugador estado;
 
     public Jugador(Rol rol) {
@@ -18,6 +20,18 @@ public class Jugador {
         return rol.revelarBandoA(solicitante);
     }
 
+    public Rol consultarRol(Jugador solicitante) {
+        if (solicitante.estaVivo()) {
+            //salta excepcion
+            return null;
+        }
+        return solicitante.getRol();
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
     public void cambiarEstado(EstadoJugador nuevoEstado) {
         this.estado = nuevoEstado;
     }
@@ -28,5 +42,18 @@ public class Jugador {
 
     public void actuarDeNoche() {
         estado.actuarDeNoche(rol);
+    }
+
+    public void votar(Urna urna, Jugador votado) {
+        if ( !this.estaVivo() ) {
+            throw new UnsupportedOperationException("Un jugador muerto no puede votar");
+        }
+        urna.registrarVoto(this, votado);
+    }
+
+    public void nominar(Urna urna, Jugador jugadorANominar) {
+        if ( this.estaVivo() ) {
+            urna.agregarCandidato(jugadorANominar);
+        }
     }
 }

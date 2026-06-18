@@ -2,13 +2,13 @@ package edu.fiuba.algo3.modelo.FaseNocturna;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Roles.Mafioso;
+import edu.fiuba.algo3.modelo.Urna.Urna;
 
 import java.util.List;
 
 public class Mafia {
 
-    private final VotacionMafia votacion = new VotacionMafia(new ContadorVotos());
-
+    private final Urna urna = new Urna();
     public void recolectarVotos(List<Mafioso> mafiosos) {
 
         if (mafiosos == null || mafiosos.isEmpty()) {
@@ -17,18 +17,26 @@ public class Mafia {
 
         for (Mafioso mafioso : mafiosos) {
 
-            Jugador voto = mafioso.obtenerVictima();
+            Jugador victima = mafioso.obtenerVictima();
 
-            if (voto == null) {
+            if (victima == null) {
                 throw new IllegalStateException();
             }
 
-            votacion.registrarVoto(voto);
+            urna.agregarCandidato(victima);
+            urna.registrarVoto(null, victima);
         }
     }
 
     public Jugador resolverVictima() {
-        return votacion.obtenerGanador();
+
+        List<Jugador> ganadores = urna.getGanadores();
+
+        if (ganadores.size() > 1) {
+            return null;
+        }
+
+        return ganadores.get(0);
     }
 
     public void actuarDeNoche() {

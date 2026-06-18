@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+
 public abstract class Rol {
     private Bando bando;
 
@@ -14,14 +15,9 @@ public abstract class Rol {
     public abstract Bando revelarBandoA(Jugador solicitante);
 
     public boolean esDeLaMafia() {
-        return bando instanceof BandoMafia;
+        return bando.esMafia();
     }
 
-    public void elegirVictima(Jugador victima) {
+    public void actuarDeNoche() {
     }
-
-    public void elegirProtegido(Jugador protegido) {
-    }
-
-
 }

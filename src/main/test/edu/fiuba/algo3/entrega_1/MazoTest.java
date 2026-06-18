@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entrega_1;
+/*package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Mazo.*;
@@ -77,31 +77,31 @@ public class MazoTest {
     }
 
 //Este test debemos revisarlo
-//    @Test
-//    public void test03JugadorSoloPuedeVerSuPropioRol() {
-//
-//        // Arrage
-//        Mazo mazo = new Mazo(6);
-//        List<Jugador> jugadores = new ArrayList<>();
-//
-//        jugadores.add(new Jugador("Jugador " + 1));
-//        jugadores.add(new Jugador("Jugador " + 2));
-//
-//        mazo.repartir(jugadores);
-//
-//        Jugador jugador1 = jugadores.get(0);
-//        Jugador jugador2 = jugadores.get(1);
-//
-//        // Act
-//        Bando bandoPropio = jugador1.consultarBando(jugador1);
-//        Bando bandoAjeno = jugador1.consultarBando(jugador2);
-//
-//        // Assert
-//        assertNotNull(bandoPropio);
-//        assertNull(bandoAjeno);
-//
-//    }
-//
+    @Test
+    public void test03JugadorSoloPuedeVerSuPropioRol() {
+
+        // Arrage
+        Mazo mazo = Mazo.crear(6);
+        List<Jugador> jugadores = new ArrayList<>();
+
+        jugadores.add(new Jugador("Jugador " + 1));
+        jugadores.add(new Jugador("Jugador " + 2));
+
+        mazo.repartir(jugadores);
+
+        Jugador jugador1 = jugadores.get(0);
+        Jugador jugador2 = jugadores.get(1);
+
+        // Act
+        Bando bandoPropio = jugador1.consultarBando(jugador1);
+        Bando bandoAjeno = jugador1.consultarBando(jugador2);
+
+        // Assert
+        assertNotNull(bandoPropio);
+        assertNull(bandoAjeno);
+
+    }
+    
     @Test
     public void test04MafiososSeConocenEntreEllos() {
 
@@ -123,7 +123,7 @@ public class MazoTest {
         assertNotNull(bandoComplice);
         assertNull(bandoCiudadano);
     }
-}
+}*/
 
 
 

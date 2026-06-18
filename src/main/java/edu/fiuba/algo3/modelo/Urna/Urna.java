@@ -32,7 +32,11 @@ public class Urna {
     }
 
     public void registrarVoto(Jugador votador,Jugador votado) {
-        this.votos.add(new Voto(votador, votado));
+        if ( this.esCandidato( votado )) {
+            this.votos.add(new Voto(votador, votado));
+        } else {
+            throw new IllegalArgumentException("Solo se puede votar a los jugador nominados");
+        }
     }
 
     public List<Jugador> obtenerCandidatos(){

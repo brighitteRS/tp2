@@ -8,7 +8,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 ## Grupo {N}
 
 * **Brighitte Raymundo 1** - [integrante1](https://github.com/brighitteRS)
-* **Integrante 2** - [integrante2](https://github.com/integrante2)
+* **Josue Segura** - [integrante2](https://github.com/josv2003)
 * **Facundo Cañoli** - [FacundoNCA](https://github.com/FacundoNCA)
 * **Integrante 4** - [Ignacio Cettour](https://github.com/ignaciocettour)
 

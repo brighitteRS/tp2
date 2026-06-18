@@ -25,10 +25,15 @@ public class FaseDiurna {
     }
 
     public Jugador eliminarAlMasVotado(){
-        Jugador votado = urna.obtenerResultadosDeLaVotacion();
-        votado.revelarRol();
-        return votado.eliminar();
-    }
+        List<Jugador> ganadores = urna.getGanadores();
 
+        if ( ganadores.size() > 1  ) {
+            return null;
+        }
+
+        Jugador eliminado = ganadores.get(0);
+        eliminado.eliminar();
+        return eliminado;
+    }
 
 }

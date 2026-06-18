@@ -39,27 +39,29 @@ public class Urna {
         return candidatos;
     }
 
-    public Jugador obtenerResultadosDeLaVotacion() {
+    public List<Jugador> getGanadores() {
 
         if (candidatos.isEmpty()) {
             // Lanzar un excepcion
         }
 
-        Jugador candidatoMasVotado = candidatos.get(0);
-        int votosMax = conteo(candidatoMasVotado);
+        List<Jugador> ganadores = new ArrayList<>();
+        int votosMax = -1;
 
-        for (int i = 1; i < candidatos.size(); i++) {
-            Jugador candidatoActual = candidatos.get(i);
-            int votosActuales = conteo(candidatoActual);
+        for (Jugador c : candidatos) {
+            int votosActuales = conteo(c);
 
             if (votosActuales > votosMax) {
                 votosMax = votosActuales;
-                candidatoMasVotado = candidatoActual;
+                ganadores.clear();
+                ganadores.add(c);
+            } else if ( votosActuales == votosMax ) {
+                ganadores.add(c);
             }
 
         }
 
-        return candidatoMasVotado;
+        return ganadores;
     }
 
     private int conteo(Jugador candidato) {

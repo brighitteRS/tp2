@@ -37,10 +37,33 @@ public class FaseDiurnaTest {
         jugador4.votar(urna, jugadorAeliminar);
         jugador5.votar(urna, jugadorAeliminar);
 
+
         Jugador eliminado = fase.eliminarAlMasVotado();
 
         // Assert
         assertEquals(jugadorAeliminar, eliminado);
+
+    }
+
+    @Test
+    public void test02SiEmpatanEnLaVotacionSeCancelaLaEliminacion() {
+        // Arrange
+        Jugador jugador1 = new Jugador("j1", new Mafioso(), true);
+        Jugador jugador2 = new Jugador("j2", new Ciudadano(), true);
+
+        List<Jugador> candidatos = new ArrayList<>();
+        candidatos.add(jugador1);
+        candidatos.add(jugador2);
+        Urna urna = new Urna(candidatos);
+        FaseDiurna fase = new FaseDiurna(urna);
+
+        // Act
+        jugador1.votar(urna, jugador2);
+        jugador2.votar(urna, jugador1);
+        Jugador eliminado = fase.eliminarAlMasVotado();
+
+        // Assert
+        assertNull(eliminado);
 
     }
 

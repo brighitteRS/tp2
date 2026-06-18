@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 public class Jugador {
 
-    private Rol rol;
+    private final Rol rol;
     private EstadoJugador estado;
 
     public Jugador(Rol rol) {
@@ -16,6 +16,18 @@ public class Jugador {
 
     public Bando consultarBando(Jugador solicitante) {
         return rol.revelarBandoA(solicitante);
+    }
+
+    public Rol consultarRol(Jugador solicitante) {
+        if (solicitante.estaVivo()) {
+            //salta excepcion
+            return null;
+        }
+        return solicitante.getRol();
+    }
+
+    public Rol getRol() {
+        return rol;
     }
 
     public void cambiarEstado(EstadoJugador nuevoEstado) {

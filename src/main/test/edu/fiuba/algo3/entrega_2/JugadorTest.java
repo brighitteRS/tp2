@@ -5,9 +5,11 @@ import edu.fiuba.algo3.modelo.FaseNocturna.Mafia;
 import edu.fiuba.algo3.modelo.Roles.Ciudadano;
 import edu.fiuba.algo3.modelo.Roles.Mafioso;
 import edu.fiuba.algo3.modelo.Roles.Medico;
+import edu.fiuba.algo3.modelo.Urna.Urna;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,7 +55,7 @@ public class JugadorTest {
         assertEquals(null, jugador2.consultarRol(jugador3));
     }
         @Test
-    public void verificaQueJugadorEliminadoNoPuedeRealizarNingunaAccion(){
+    public void verificaQueJugadorEliminadoNoPuedeRealizarNingunaAccionNocturnaEnRondasPosteriores(){
         // arrange
         Medico rolMedico = new Medico();
         Jugador medico = new Jugador(rolMedico);
@@ -76,5 +78,21 @@ public class JugadorTest {
 
         //assert
         assertFalse(jugador1.estaVivo());
+    }
+
+    @Test
+    public void verificaQueJugadorEliminadoNoPuedeRealizarNingunaAccionDiurna(){
+        // arrange
+        Jugador jugador1 = new Jugador(new Ciudadano());
+        Jugador jugador2 = new Jugador(new Ciudadano());
+
+        List<Jugador> candidatos = List.of(jugador1, jugador2);
+        Urna urna = new Urna(candidatos);
+
+        // act
+        jugador1.cambiarEstado(new Muerto());
+
+        //assert
+        assertThrows(UnsupportedOperationException.class, () -> jugador1.votar(urna, jugador2));
     }
 }

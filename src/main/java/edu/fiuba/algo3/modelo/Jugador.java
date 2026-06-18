@@ -45,9 +45,10 @@ public class Jugador {
     }
 
     public void votar(Urna urna, Jugador votado) {
-        if ( this.estaVivo() ) {
-            urna.registrarVoto(this, votado);
+        if ( !this.estaVivo() ) {
+            throw new UnsupportedOperationException("Un jugador muerto no puede votar");
         }
+        urna.registrarVoto(this, votado);
     }
 
     public void nominar(Urna urna, Jugador jugadorANominar) {

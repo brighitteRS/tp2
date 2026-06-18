@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.FaseNocturna.FaseNocturna;
 import edu.fiuba.algo3.modelo.FaseNocturna.Mafia;
 import edu.fiuba.algo3.modelo.Roles.Ciudadano;
 import edu.fiuba.algo3.modelo.Roles.Mafioso;
+import edu.fiuba.algo3.modelo.Roles.Medico;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.*;
 
@@ -50,5 +51,30 @@ public class JugadorTest {
 
         //assert
         assertEquals(null, jugador2.consultarRol(jugador3));
+    }
+        @Test
+    public void verificaQueJugadorEliminadoNoPuedeRealizarNingunaAccion(){
+        // arrange
+        Medico rolMedico = new Medico();
+        Jugador medico = new Jugador(rolMedico);
+        Jugador jugador1 = new Jugador(new Ciudadano());
+        Mafioso mafioso = new Mafioso();
+        Mafia mafia1 = new Mafia();
+        Mafia mafia2 = new Mafia();
+        FaseNocturna fase1 = new FaseNocturna(mafia1, List.of(medico));
+        FaseNocturna fase2 = new FaseNocturna(mafia2, List.of(medico));
+
+        // act
+        mafioso.elegirVictima(medico);
+        mafia1.recolectarVotos(List.of(mafioso));
+        fase1.ejecutar();
+
+        mafioso.elegirVictima(jugador1);
+        mafia2.recolectarVotos(List.of(mafioso));
+        rolMedico.elegirProtegido(jugador1);
+        fase2.ejecutar();
+
+        //assert
+        assertFalse(jugador1.estaVivo());
     }
 }

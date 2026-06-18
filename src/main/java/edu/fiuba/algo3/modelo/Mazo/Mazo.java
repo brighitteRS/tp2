@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Mazo;
 
 import edu.fiuba.algo3.modelo.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mazo {
@@ -14,15 +15,19 @@ public class Mazo {
         this.mezclador = mezclador;
     }
 
-    public static Mazo crear(int cartas, Mezclador mezclador) {
+    public static Mazo crear(int jugadores, Mezclador mezclador) {
 
         EstrategiaDeComposicion estrategia =
-                FabricaDeComposicion.crear(cartas);
+                FabricaDeComposicion.crear(jugadores);
 
         List<Rol> roles =
-                estrategia.crearRoles(cartas);
+                estrategia.crearRoles(jugadores);
 
         return new Mazo(roles, mezclador);
+    }
+
+    public static Mazo crear(int jugadores) {
+        return Mazo.crear(jugadores, new Aleatorio());
     }
 
     public int contarRolesDe(Class<?> tipo) {
@@ -40,11 +45,12 @@ public class Mazo {
         return cartas.size();
     }
 
-    public void repartir(List<Jugador> jugadores) {
+    public List<Jugador> repartir(int cantidadJugadores) {
         mezclador.mezclar(cartas);
-
-        for (int i = 0; i < jugadores.size(); i++) {
-            jugadores.get(i).asignarRol(cartas.get(i));
+        List<Jugador> jugadores = new ArrayList<>();
+        for (int i = 0; i < cantidadJugadores; i++) {
+            jugadores.add(new Jugador(cartas.get(i)));
         }
+        return jugadores;
     }
 }

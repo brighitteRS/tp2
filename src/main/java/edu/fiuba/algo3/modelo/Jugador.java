@@ -1,69 +1,38 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.List;
-
 public class Jugador {
 
-    //private final String nombre;
     private Rol rol;
-    private boolean vivo;
+    private EstadoJugador estado;
 
-    public Jugador() {
-        this.vivo = true;
-    }
-
-    public void asignarRol(Rol rol) {
+    public Jugador(Rol rol) {
         this.rol = rol;
+        this.estado = new Vivo();
     }
 
-    public boolean tieneRolAsignado() {
-        return rol != null;
+    public boolean estaVivo() {
+        return estado.estaVivo();
     }
 
     public Bando consultarBando(Jugador solicitante) {
-
-        if (solicitante == this) {
+        if (solicitante == this || !estaVivo()) {
             return rol.revelarBando();
         }
         return rol.revelarBandoA(solicitante);
     }
 
-    public boolean estaVivo() {
-        return vivo;
-    }
-
-    public void eliminar() {
-        vivo = false;
-    }
-
-    public boolean puedeSerVictima() {
-        return vivo && !rol.esDeLaMafia(); //se lo pregunta asi mismo
-    }
-
-    public void elegirVictima(Jugador victima) {
-        rol.elegirVictima(victima);
+    public void cambiarEstado(EstadoJugador nuevoEstado) {
+        this.estado = nuevoEstado;
     }
 
     public boolean esDeLaMafia() {
         return rol.esDeLaMafia();
     }
 
-    public void ejecutarAccionNocturna(FaseNocturna fase) {
-        if (rol instanceof ActorNocturno) {
-            ((ActorNocturno) rol).actuarNoche(fase); //solo lo ejecuta si es un actor nocturno
-        }
-    }
-    public void elegirProtegido(Jugador protegido) {
-        rol.elegirProtegido(protegido);
+    public void actuarDeNoche() {
+        estado.actuarDeNoche(rol);
     }
 
-    public void reconocerComplices(List<Jugador> complices) {
-        rol.reconocerComplices(complices);
-    }
-
-    public boolean esComplice(Jugador jugador) {
-        return rol.esComplice(jugador);
-    }
 
 
 }

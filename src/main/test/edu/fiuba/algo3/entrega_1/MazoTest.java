@@ -2,24 +2,23 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Mazo.*;
+import edu.fiuba.algo3.modelo.Roles.Ciudadano;
+import edu.fiuba.algo3.modelo.Roles.Detective;
+import edu.fiuba.algo3.modelo.Roles.Mafioso;
+import edu.fiuba.algo3.modelo.Roles.Medico;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.ArgumentMatchers.anyList;
-
 
 public class MazoTest {
 
     @Test
     public void test01MazoConSeisJugadoresTieneComposicionCorrecta() {
 
-        // Arrange
+         // Arrange
         Mazo mazo = Mazo.crear(6, new Aleatorio());
 
         // Act
@@ -46,7 +45,6 @@ public class MazoTest {
         cartas.add(new Ciudadano());
         cartas.add(new Ciudadano());
         cartas.add(new Ciudadano());
-
         List<Rol> copia = new ArrayList<>(cartas);
 
         // Act
@@ -61,28 +59,20 @@ public class MazoTest {
 
         // Arrange
         Mazo mazo = Mazo.crear(6, new Aleatorio());
-        List<Jugador> jugadores = crearJugadores(6);
 
         // Act
-        mazo.repartir(jugadores);
+        List<Jugador> jugadores = mazo.repartir(6);
 
         // Assert
-        for (Jugador jugador : jugadores) {
-            assertTrue(jugador.tieneRolAsignado());
-        }
+        assertEquals(6, jugadores.size());
     }
 
-//Este test debemos revisarlo
     @Test
     public void test03JugadorSoloPuedeVerSuPropioRol() {
 
         // Arrange
-        Mazo mazo = Mazo.crear(6, new Aleatorio());
-        List<Jugador> jugadores = crearJugadores(6);
-        mazo.repartir(jugadores);
-
-        Jugador jugador1 = jugadores.get(0);
-        Jugador jugador2 = jugadores.get(1);
+        Jugador jugador1 = new Jugador(new Ciudadano());
+        Jugador jugador2 = new Jugador(new Ciudadano());
 
         // Act
         Bando bandoPropio = jugador1.consultarBando(jugador1);
@@ -97,32 +87,18 @@ public class MazoTest {
     public void test04MafiososSeConocenEntreEllos() {
 
         // Arrange
-        Mazo mazo = Mazo.crear(7, new Aleatorio());
-        List<Jugador> jugadores = crearJugadores(7);
+        Jugador jugador1 = new Jugador(new Mafioso());
+        Jugador jugador2 = new Jugador(new Mafioso());
+        Jugador jugador3 = new Jugador(new Ciudadano());
 
         // Act
-        Partida partida = new Partida(jugadores, mazo);
-
-        List<Jugador> mafiosos = jugadores.stream()
-                .filter(Jugador::esDeLaMafia)
-                .collect(Collectors.toList());
-        Jugador noMafioso = jugadores.stream()
-                .filter(j -> !j.esDeLaMafia())
-                .findFirst().get();
+        Bando bandoComplice = jugador1.consultarBando(jugador2);
+        Bando bandoCiudadano = jugador1.consultarBando(jugador3);
 
         // Assert
-        assertTrue(mafiosos.get(0).esComplice(mafiosos.get(1)));
-        assertFalse(mafiosos.get(0).esComplice(noMafioso));
+        assertNotNull(bandoComplice);
+        assertNull(bandoCiudadano);
     }
-
-    private List<Jugador> crearJugadores(int cantidad) {
-        List<Jugador> jugadores = new ArrayList<>();
-        for (int i = 0; i < cantidad; i++) {
-            jugadores.add(new Jugador());
-        }
-        return jugadores;
-    }
-
 }
 
 

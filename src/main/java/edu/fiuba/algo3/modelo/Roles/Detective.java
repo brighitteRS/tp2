@@ -36,7 +36,7 @@ public class Detective extends Rol {
     public Bando revelarBandoA(Jugador solicitante) {
         return revelarBando();
     }
-
+//solucionar el tema del null(aplicar tdd para solucionar el bug)
     @Override
     public void actuarDeNoche() {
         resultado = investigado.consultarBando(investigado).obtenerNombre();

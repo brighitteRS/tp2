@@ -30,6 +30,8 @@ public class UrnaTest {
             jugador2.nominar(urna, jugador1);
         });
 
+        // Separar la responsabilidad de las nominaciones
+
     }
 
     @Test

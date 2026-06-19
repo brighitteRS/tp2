@@ -73,6 +73,7 @@ public class JugadorTest {
 
         mafioso.elegirVictima(jugador1);
         mafia2.recolectarVotos(List.of(mafioso));
+        // Lanzar un error al usar jugador muerto
         rolMedico.elegirProtegido(jugador1);
         fase2.ejecutar();
 

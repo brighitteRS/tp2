@@ -11,10 +11,11 @@ public class FaseNocturna2Test {
     public void elDetectiveRecibeResultadoCorrectoAlInvestigarMafioso() {
 
         Jugador mafioso = new Jugador(new Mafioso());
-        Detective detective = new Detective();
+        Detective detective = new Detective(); //tiene q ser um jugador
 
         detective.elegirInvestigado(mafioso);
         detective.actuarDeNoche();
+        // no debe ser bando un string (no usar dato primitivo)
         assertEquals("Mafia", detective.resultadoInvestigacion());
     }
 
@@ -61,4 +62,5 @@ public class FaseNocturna2Test {
 
         assertThrows(IllegalArgumentException.class, () -> medico.elegirProtegido(objetivo));
     }
+    //codigo repetido en elegir (medico y detective) hacer refactor
 }

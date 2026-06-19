@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FaseDiurnaTest {
@@ -24,10 +25,7 @@ public class FaseDiurnaTest {
         Jugador jugador4 = new Jugador(new Ciudadano());
         Jugador jugador5 = new Jugador(new Ciudadano());
 
-        List<Jugador> candidatos = new ArrayList<>();
-        candidatos.add(jugadorAeliminar);
-        candidatos.add(jugador2);
-        Urna urna = new Urna(candidatos);
+        Urna urna = new Urna(Arrays.asList(jugadorAeliminar, jugador2));
         FaseDiurna fase = new FaseDiurna(urna);
 
         // Act
@@ -43,6 +41,12 @@ public class FaseDiurnaTest {
         // Assert
         assertEquals(jugadorAeliminar, eliminado);
 
+//        fase.nominar(jugadorAeliminar);
+//        fase.nominar(jugador2);
+//
+//        fase.votar(j1, j2);
+//
+//        fase.eliminarAlMasVotado();
     }
 
     @Test

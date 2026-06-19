@@ -43,6 +43,7 @@ public class Mafia {
 
         Jugador victima = resolverVictima();
 
+        // Null Patter
         if (victima != null) {
             victima.cambiarEstado(new Muerto());
         }

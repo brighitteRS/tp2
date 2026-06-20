@@ -23,7 +23,6 @@ public class JugadorTest {
         Mafia mafia = new Mafia();
         Mafioso mafioso = new Mafioso();
         Jugador victima = new Jugador(rolCiudadano);
-        Jugador jugador2 = new Jugador(new Ciudadano());
         FaseNocturna fase = new FaseNocturna(mafia, List.of());
 
         //act
@@ -32,7 +31,7 @@ public class JugadorTest {
         fase.ejecutar();
 
         //assert
-        assertEquals(rolCiudadano, jugador2.consultarRol(victima));
+        assertEquals(rolCiudadano, victima.mostrarRol());
     }
 
     @Test
@@ -42,7 +41,6 @@ public class JugadorTest {
         Mafia mafia = new Mafia();
         Mafioso mafioso = new Mafioso();
         Jugador victima = new Jugador(rolCiudadano);
-        Jugador jugador2 = new Jugador(new Ciudadano());
         Jugador jugador3 = new Jugador(new Ciudadano());
         FaseNocturna fase = new FaseNocturna(mafia, List.of());
 
@@ -52,9 +50,10 @@ public class JugadorTest {
         fase.ejecutar();
 
         //assert
-        assertEquals(null, jugador2.consultarRol(jugador3));
+        assertNull(jugador3.mostrarRol());
     }
-        @Test
+
+    @Test
     public void verificaQueJugadorEliminadoNoPuedeRealizarNingunaAccionNocturnaEnRondasPosteriores(){
         // arrange
         Medico rolMedico = new Medico();

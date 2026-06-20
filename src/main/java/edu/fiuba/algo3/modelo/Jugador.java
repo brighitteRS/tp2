@@ -20,16 +20,12 @@ public class Jugador {
         return rol.revelarBandoA(solicitante);
     }
 
-    public Rol consultarRol(Jugador solicitante) {
-        if (solicitante.estaVivo()) {
+    public Rol mostrarRol() {
+        if (this.estaVivo()) {
             //salta excepcion
             return null;
         }
-        return solicitante.getRol();
-    }
-
-    public Rol getRol() {
-        return rol;
+        return this.rol;
     }
 
     public void cambiarEstado(EstadoJugador nuevoEstado) {

@@ -1,30 +1,15 @@
 package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 
 public class Medico extends Rol {
 
-    private Jugador ultimoProtegido;
-    private Jugador protegido;
+    private Jugador ultimoProtegido = new JugadorNulo();
+    private Jugador protegido = new JugadorNulo();
 
     public Medico() {
-        super(new BandoCiudadano());
-    }
-
-    public void elegirProtegido(Jugador jugador) {
-        validarProteccion(jugador);
-        this.ultimoProtegido = jugador;
-        this.protegido = jugador;
-    }
-
-    private void validarProteccion(Jugador jugador) {
-        if (jugador == null) {
-            throw new IllegalArgumentException();
-        }
-
-        if (!jugador.estaVivo() || jugador.equals(ultimoProtegido)) {
-            throw new IllegalArgumentException();
-        }
+        super(BandoCiudadano.INSTANCIA);
     }
 
     @Override
@@ -33,10 +18,20 @@ public class Medico extends Rol {
     }
 
     @Override
-    public void actuarDeNoche() {
+    protected void ejecutoEleccion(Jugador objetivo) {
 
-        if (protegido != null) {
-            protegido.cambiarEstado(new Vivo());
+        if (objetivo.equals(ultimoProtegido)) {
+            throw new IllegalArgumentException();
         }
+
+        ultimoProtegido = objetivo;
+        protegido = objetivo;
     }
+
+    @Override
+    public void actuarDeNoche() {
+        protegido.cambiarEstado(new Vivo());
+        protegido = new JugadorNulo();
+    }
+
 }

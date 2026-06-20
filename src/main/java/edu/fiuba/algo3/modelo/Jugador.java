@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Urna.Urna;
+import edu.fiuba.algo3.modelo.NullPattern.RolNulo;
 
 public class Jugador {
 
@@ -21,11 +21,11 @@ public class Jugador {
     }
 
     public Rol consultarRol(Jugador solicitante) {
-        if (solicitante.estaVivo()) {
-            //salta excepcion
-            return null;
-        }
-        return solicitante.getRol();
+        return solicitante.puedeVerRol(this) ? rol : new RolNulo();
+    }
+
+    public boolean puedeVerRol(Jugador objetivo) {
+        return estado.puedeVerRol(objetivo);
     }
 
     public Rol getRol() {
@@ -43,7 +43,7 @@ public class Jugador {
     public void actuarDeNoche() {
         estado.actuarDeNoche(rol);
     }
-
+/*
     public void votar(Urna urna, Jugador votado) {
         if ( !this.estaVivo() ) {
             throw new UnsupportedOperationException("Un jugador muerto no puede votar");
@@ -55,5 +55,21 @@ public class Jugador {
         if ( this.estaVivo() ) {
             urna.agregarCandidato(jugadorANominar);
         }
+    }*/
+
+    public void elegir(Jugador objetivo){
+        estado.ejecutarEleccion(rol,objetivo);
+    }
+
+    public Jugador obtenerVictima() {
+        return rol.obtenerVictima();
+    }
+
+    public Bando resultadoInvestigacion() {
+        return rol.obtenerResultado();
+    }
+
+    public boolean estaNulo() {
+        return false;
     }
 }

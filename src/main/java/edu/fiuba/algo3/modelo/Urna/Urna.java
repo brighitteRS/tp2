@@ -5,83 +5,55 @@ import edu.fiuba.algo3.modelo.Jugador;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Urna {
-
-    private List<Jugador> candidatos;
+    private List<Jugador> votados;
     private List<Voto> votos;
 
     public Urna() {
-        this.candidatos = new ArrayList<>();
+        this.votados = new ArrayList<>();
         this.votos = new ArrayList<>();
-    }
-
-    public Urna(List<Jugador> candidatos) {
-        this.candidatos = candidatos;
-        this.votos = new ArrayList<>();
-    }
-
-    public void agregarCandidato( Jugador nuevoCandidato ) {
-
-        if (!nuevoCandidato.estaVivo()){
-            throw new IllegalArgumentException("El jugador a nominar debe estar vivo");
-        }
-        if ( !this.esCandidato(nuevoCandidato)) {
-            candidatos.add(nuevoCandidato);
-        }
     }
 
     public void registrarVoto(Jugador votador,Jugador votado) {
-        if ( this.esCandidato( votado )) {
-            this.votos.add(new Voto(votador, votado));
-        } else {
-            throw new IllegalArgumentException("Solo se puede votar a los jugador nominados");
-        }
-    }
-
-    public List<Jugador> obtenerCandidatos(){
-        return candidatos;
+        this.agregarVotado(votado);
+        this.votos.add(new Voto(votador, votado));
     }
 
     public List<Jugador> getGanadores() {
 
-        if (candidatos.isEmpty()) {
-            // Lanzar un excepcion
-        }
-
         List<Jugador> ganadores = new ArrayList<>();
         int votosMax = -1;
 
-        for (Jugador c : candidatos) {
-            int votosActuales = conteo(c);
+        for (Jugador v : votados) {
+            int votosActuales = conteo(v);
 
             if (votosActuales > votosMax) {
                 votosMax = votosActuales;
                 ganadores.clear();
-                ganadores.add(c);
+                ganadores.add(v);
             } else if ( votosActuales == votosMax ) {
-                ganadores.add(c);
+                ganadores.add(v);
             }
-
         }
-
         return ganadores;
     }
 
-    private int conteo(Jugador candidato) {
+    private int conteo(Jugador votado) {
         int cantidadVotos = 0;
         for (Voto v : votos) {
-            if (v.obtenerVotado().equals(candidato)) {
+            if (v.obtenerVotado().equals(votado)) {
                 cantidadVotos++;
             }
         }
         return cantidadVotos;
     }
 
-    private boolean esCandidato(Jugador jugador) {
-        return candidatos.contains(jugador);
+    private boolean fueVotado(Jugador jugador) {
+        return votados.contains(jugador);
     }
 
-
-
-}
+    private void agregarVotado(Jugador votado) {
+        if ( !this.fueVotado(votado) ){
+            votados.add(votado);
+        }
+    }}

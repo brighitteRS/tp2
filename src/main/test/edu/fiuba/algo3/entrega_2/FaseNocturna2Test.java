@@ -11,32 +11,33 @@ public class FaseNocturna2Test {
     public void elDetectiveRecibeResultadoCorrectoAlInvestigarMafioso() {
 
         Jugador mafioso = new Jugador(new Mafioso());
-        Detective detective = new Detective(); //tiene q ser um jugador
+        Jugador detective = new Jugador(new Detective()); //tiene q ser um jugador
 
-        detective.elegirInvestigado(mafioso);
+        detective.elegir(mafioso);
         detective.actuarDeNoche();
         // no debe ser bando un string (no usar dato primitivo)
-        assertEquals("Mafia", detective.resultadoInvestigacion());
+        assertEquals(BandoMafia.INSTANCIA,detective.resultadoInvestigacion());
     }
 
     @Test
     public void elDetectiveRecibeResultadoCorrectoAlInvestigarCiudadano() {
 
         Jugador ciudadano = new Jugador(new Ciudadano());
-        Detective detective = new Detective();
-        detective.elegirInvestigado(ciudadano);
+        Jugador detective = new Jugador(new Detective());
+
+        detective.elegir(ciudadano);
         detective.actuarDeNoche();
-        assertEquals("Ciudadano", detective.resultadoInvestigacion());
+        assertEquals(BandoCiudadano.INSTANCIA,detective.resultadoInvestigacion());
     }
 
     @Test
     public void elDetectiveRecibeAlPadrinoComoCiudadano() {
 
         Jugador padrino = new Jugador(new Padrino());
-        Detective detective = new Detective();
-        detective.elegirInvestigado(padrino);
+        Jugador detective = new Jugador(new Detective());
+        detective.elegir(padrino);
         detective.actuarDeNoche();
-        assertEquals("Ciudadano", detective.resultadoInvestigacion());
+        assertEquals(BandoCiudadano.INSTANCIA,detective.resultadoInvestigacion());
     }
 
     @Test
@@ -46,9 +47,9 @@ public class FaseNocturna2Test {
 
         Detective detective = new Detective();
 
-        assertDoesNotThrow(() -> detective.elegirInvestigado(objetivo));
+        assertDoesNotThrow(() -> detective.elegir(objetivo));
 
-        assertThrows(IllegalArgumentException.class, () -> detective.elegirInvestigado(objetivo));
+        assertThrows(IllegalArgumentException.class, () -> detective.elegir(objetivo));
     }
 
     @Test
@@ -58,9 +59,9 @@ public class FaseNocturna2Test {
 
         Medico medico = new Medico();
 
-        assertDoesNotThrow(() -> medico.elegirProtegido(objetivo));
+        assertDoesNotThrow(() -> medico.elegir(objetivo));
 
-        assertThrows(IllegalArgumentException.class, () -> medico.elegirProtegido(objetivo));
+        assertThrows(IllegalArgumentException.class, () -> medico.elegir(objetivo));
     }
     //codigo repetido en elegir (medico y detective) hacer refactor
 }

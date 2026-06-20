@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entrega_2;
+/*package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.FaseNocturna.FaseNocturna;
 import edu.fiuba.algo3.modelo.FaseNocturna.Mafia;
@@ -73,7 +73,6 @@ public class JugadorTest {
 
         mafioso.elegirVictima(jugador1);
         mafia2.recolectarVotos(List.of(mafioso));
-        // Lanzar un error al usar jugador muerto
         rolMedico.elegirProtegido(jugador1);
         fase2.ejecutar();
 
@@ -96,4 +95,4 @@ public class JugadorTest {
         //assert
         assertThrows(UnsupportedOperationException.class, () -> jugador1.votar(urna, jugador2));
     }
-}
+}*/

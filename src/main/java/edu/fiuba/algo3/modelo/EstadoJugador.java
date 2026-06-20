@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
 public interface EstadoJugador {
-
-    void actuarDeNoche(Rol rol);
-
-    boolean estaVivo();
+    boolean puedeInteractuarCon(Jugador objetivo);
+    boolean puedeVerRol(Jugador objetivo);
+   boolean estaVivo();
+   void actuarDeNoche(Rol rol);
+   void ejecutarEleccion(Rol rol, Jugador objetivo);
 }

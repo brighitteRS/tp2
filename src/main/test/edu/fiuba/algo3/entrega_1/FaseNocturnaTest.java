@@ -15,11 +15,13 @@ public class FaseNocturnaTest {
 
         Jugador victima = new Jugador(new Ciudadano());
 
-        Mafioso mafioso1 = new Mafioso();
+        Jugador mafioso1 = new Jugador(new Mafioso());
+        Mafia mafia = new Mafia();
+        mafioso1.elegir(victima);
 
-        mafioso1.elegirVictima(victima);
+        mafia.actuarDeNoche(List.of(mafioso1));
 
-        assertEquals(victima, mafioso1.obtenerVictima());
+        assertEquals(victima, mafia.obtenerResolucion());
     }
 
     @Test
@@ -30,32 +32,28 @@ public class FaseNocturnaTest {
 
         Jugador mafioso = new Jugador(new Mafioso());
 
-        Mafioso mafioso1 = new Mafioso();
-        Mafioso mafioso2 = new Mafioso();
+        Jugador mafioso1 = new Jugador(new Mafioso());
+        Jugador mafioso2 = new Jugador(new Mafioso());
 
-        assertThrows(IllegalArgumentException.class, () -> {mafioso1.elegirVictima(jugador);});
+        assertThrows(IllegalArgumentException.class, () -> {mafioso1.elegir(jugador);});
 
-        assertThrows(IllegalArgumentException.class, () -> {mafioso2.elegirVictima(mafioso);});
+        assertThrows(IllegalArgumentException.class, () -> {mafioso2.elegir(mafioso);});
     }
 
     @Test
     public void elMedicoSalvaAlJugadorAtacadoPorLaMafia() {
 
         Jugador victima = new Jugador(new Ciudadano());
-        Mafia mafia = new Mafia();
 
-        Mafioso mafioso = new Mafioso();
+        Jugador jugadorMafioso = new Jugador(new Mafioso());
 
-        mafioso.elegirVictima(victima);
+        jugadorMafioso.elegir(victima);
 
-        mafia.recolectarVotos(List.of(mafioso));
+        Jugador jugadorMedico = new Jugador(new Medico());
 
-        Medico medico = new Medico();
-        medico.elegirProtegido(victima);
+        jugadorMedico.elegir(victima);
 
-        Jugador jugadorMedico = new Jugador(medico);
-
-        FaseNocturna fase = new FaseNocturna(mafia, List.of(jugadorMedico));
+        FaseNocturna fase = new FaseNocturna(List.of(jugadorMafioso,jugadorMedico));
 
         fase.ejecutar();
 
@@ -68,19 +66,13 @@ public class FaseNocturnaTest {
         Jugador victima = new Jugador(new Ciudadano());
         Jugador protegido = new Jugador(new Ciudadano());
 
-        Mafia mafia = new Mafia();
+        Jugador mafioso = new Jugador(new Mafioso());
+        mafioso.elegir(victima);
 
-        Mafioso mafioso = new Mafioso();
-        mafioso.elegirVictima(victima);
+        Jugador jugadorMedico = new Jugador(new Medico());
+        jugadorMedico.elegir(protegido);
 
-        mafia.recolectarVotos(List.of(mafioso));
-
-        Medico medico = new Medico();
-        medico.elegirProtegido(protegido);
-
-        Jugador jugadorMedico = new Jugador(medico);
-
-        FaseNocturna fase = new FaseNocturna(mafia, List.of(jugadorMedico));
+        FaseNocturna fase = new FaseNocturna(List.of(mafioso,jugadorMedico));
 
         fase.ejecutar();
 

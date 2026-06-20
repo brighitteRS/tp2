@@ -4,11 +4,14 @@ import edu.fiuba.algo3.modelo.*;
 
 public class Padrino extends Rol {
     public Padrino() {
-        super(new BandoMafia());
+        super(BandoMafia.INSTANCIA);
     }
 
     @Override
     public Bando revelarBandoA(Jugador solicitante) {
-        return new BandoCiudadano();
+        return BandoCiudadano.INSTANCIA;
+    }
+    @Override
+    protected void ejecutoEleccion(Jugador objetivo) {
     }
 }

@@ -2,10 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 public class BandoMafia implements Bando {
 
-    @Override
-    public String obtenerNombre() {
-        return "Mafia";
-    }
+    public static final BandoMafia INSTANCIA = new BandoMafia();
+
+    private BandoMafia() {}
 
     @Override
     public boolean esMafia() {

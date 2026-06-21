@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Mazo.*;
+import edu.fiuba.algo3.modelo.NullPattern.BandoNulo;
 import edu.fiuba.algo3.modelo.Roles.Ciudadano;
 import edu.fiuba.algo3.modelo.Roles.Detective;
 import edu.fiuba.algo3.modelo.Roles.Mafioso;
@@ -12,13 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.anyList;
+
 
 public class MazoTest {
 
     @Test
     public void test01MazoConSeisJugadoresTieneComposicionCorrecta() {
 
-         // Arrange
+        // Arrange
         Mazo mazo = Mazo.crear(6, new Aleatorio());
 
         // Act
@@ -36,7 +41,6 @@ public class MazoTest {
 
     @Test
     public void test02VerificarQueElRepartoDeCartasSeaAleatorio() {
-
         // Arrange
         List<Rol> cartas = new ArrayList<>();
         cartas.add(new Mafioso());
@@ -55,50 +59,46 @@ public class MazoTest {
     }
 
     @Test
-    public void test02CadaJugadorRecibeUnRol() {
+    public void test03CadaJugadorRecibeUnRol() {
 
-        // Arrange
-        Mazo mazo = Mazo.crear(6, new Aleatorio());
+        Mazo mazo = Mazo.crear(6);
+        List<Jugador> jugadores = new ArrayList<>();
 
-        // Act
-        List<Jugador> jugadores = mazo.repartir(6);
+        mazo.repartir(6, jugadores);
 
-        // Assert
         assertEquals(6, jugadores.size());
     }
 
-    @Test
-    public void test03JugadorSoloPuedeVerSuPropioRol() {
 
+    @Test
+    public void test04JugadorSoloPuedeVerSuPropioRol() {
+
+        Jugador ciudadano1 = new Jugador(new Ciudadano());
+        Jugador ciudadano2 = new Jugador(new Ciudadano());
+
+        Bando bandoPropio = ciudadano1.consultarBando(ciudadano1);
+        Bando bandoAjeno = ciudadano1.consultarBando(ciudadano2);
+
+        assertEquals(BandoCiudadano.INSTANCIA, bandoPropio);
+        assertEquals(BandoNulo.INSTANCIA, bandoAjeno);
+    }
+
+    @Test
+    public void test05MafiososSeConocenEntreEllos() {
         // Arrange
-        Jugador jugador1 = new Jugador(new Ciudadano());
-        Jugador jugador2 = new Jugador(new Ciudadano());
+        Jugador mafioso1 = new Jugador(new Mafioso());
+        Jugador mafioso2 = new Jugador(new Mafioso());
+        Jugador ciudadano = new Jugador(new Ciudadano());
 
         // Act
-        Bando bandoPropio = jugador1.consultarBando(jugador1);
-        Bando bandoAjeno = jugador1.consultarBando(jugador2);
+        Bando bandoComplice = mafioso1.consultarBando(mafioso2);
+        Bando bandoCiudadano = mafioso1.consultarBando(ciudadano);
 
         // Assert
-        assertNotNull(bandoPropio);
-        assertNull(bandoAjeno);
+        assertEquals(BandoMafia.INSTANCIA, bandoComplice);
+        assertEquals(BandoNulo.INSTANCIA, bandoCiudadano);
     }
-    
-    @Test
-    public void test04MafiososSeConocenEntreEllos() {
 
-        // Arrange
-        Jugador jugador1 = new Jugador(new Mafioso());
-        Jugador jugador2 = new Jugador(new Mafioso());
-        Jugador jugador3 = new Jugador(new Ciudadano());
-
-        // Act
-        Bando bandoComplice = jugador1.consultarBando(jugador2);
-        Bando bandoCiudadano = jugador1.consultarBando(jugador3);
-
-        // Assert
-        assertNotNull(bandoComplice);
-        assertNull(bandoCiudadano);
-    }
 }
 
 

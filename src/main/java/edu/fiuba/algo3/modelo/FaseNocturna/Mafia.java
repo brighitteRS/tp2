@@ -1,42 +1,51 @@
 package edu.fiuba.algo3.modelo.FaseNocturna;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Roles.Mafioso;
+import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
+import edu.fiuba.algo3.modelo.Urna.Urna;
 
 import java.util.List;
 
 public class Mafia {
 
-    private final VotacionMafia votacion = new VotacionMafia(new ContadorVotos());
+    private final Urna urna = new Urna();
 
-    public void recolectarVotos(List<Mafioso> mafiosos) {
+    public void actuarDeNoche(List<Jugador> jugadores) {
 
-        if (mafiosos == null || mafiosos.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
+        recolectarVotos(jugadores);
 
-        for (Mafioso mafioso : mafiosos) {
+        resolverResultado();
+    }
 
-            Jugador voto = mafioso.obtenerVictima();
+    private void recolectarVotos(List<Jugador> jugadores) {
 
-            if (voto == null) {
-                throw new IllegalStateException();
-            }
+        for (Jugador jugador : jugadores) {
 
-            votacion.registrarVoto(voto);
+            Jugador victima = jugador.obtenerVictima();
+
+            if (victima.estaNulo()) continue;
+
+            urna.registrarVoto(jugador, victima);
         }
     }
 
-    public Jugador resolverVictima() {
-        return votacion.obtenerGanador();
+    private void resolverResultado() {
+
+        Jugador victima = obtenerResolucion();
+
+        if (victima.estaNulo()) return;
+
+        victima.cambiarEstado(new Muerto());
     }
 
-    public void actuarDeNoche() {
+    public Jugador obtenerResolucion() {
 
-        Jugador victima = resolverVictima();
+        List<Jugador> ganadores = urna.getGanadores();
 
-        if (victima != null) {
-            victima.cambiarEstado(new Muerto());
+        if (ganadores.size() != 1) {
+            return new JugadorNulo();
         }
+
+        return ganadores.get(0);
     }
 }

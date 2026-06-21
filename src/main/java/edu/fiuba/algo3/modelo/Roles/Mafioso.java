@@ -1,42 +1,37 @@
 package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.NullPattern.BandoNulo;
+import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 
 public class Mafioso extends Rol {
 
-    private Jugador victimaElegida;
+    private Jugador victimaElegida = new JugadorNulo();
 
     public Mafioso() {
-        super(new BandoMafia());
+        super(BandoMafia.INSTANCIA);
     }
 
-    public void elegirVictima(Jugador jugador) {
-        validarVictima(jugador);
-        this.victimaElegida = jugador;
-    }
-
-    private void validarVictima(Jugador jugador) {
-        if (jugador == null) {
-            throw new IllegalArgumentException();
-        }
-
-        if (!jugador.estaVivo() || jugador.esDeLaMafia()) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public Jugador obtenerVictima() {
-        return victimaElegida;
-    }
 
     @Override
     public Bando revelarBandoA(Jugador solicitante) {
+
         if (solicitante.esDeLaMafia()) {
-            return revelarBando();
-        }
-        return null;
+            return revelarBando();}
+
+        return BandoNulo.INSTANCIA;
     }
 
+    @Override
+    protected void ejecutoEleccion(Jugador objetivo) {
+        if (objetivo.esDeLaMafia()) {
+            throw new IllegalArgumentException();
+        }
+        victimaElegida = objetivo;
+    }
 
-
+    @Override
+    public Jugador obtenerVictima() {
+        return victimaElegida;
+    }
 }

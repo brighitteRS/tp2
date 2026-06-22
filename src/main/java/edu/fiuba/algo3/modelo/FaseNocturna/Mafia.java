@@ -10,11 +10,11 @@ public class Mafia {
 
     private final Urna urna = new Urna();
 
-    public void actuarDeNoche(List<Jugador> jugadores) {
+    public void actuarDeNoche(List<Jugador> jugadores, ResultadoNocturno resultado) {
 
         recolectarVotos(jugadores);
 
-        resolverResultado();
+        resolverResultado(resultado);
     }
 
     private void recolectarVotos(List<Jugador> jugadores) {
@@ -29,13 +29,13 @@ public class Mafia {
         }
     }
 
-    private void resolverResultado() {
+    private void resolverResultado(ResultadoNocturno resultado) {
 
         Jugador victima = obtenerResolucion();
 
         if (victima.estaNulo()) return;
 
-        victima.cambiarEstado(new Muerto());
+        resultado.registrarAtaque(victima);
     }
 
     public Jugador obtenerResolucion() {
@@ -43,7 +43,7 @@ public class Mafia {
         List<Jugador> ganadores = urna.getGanadores();
 
         if (ganadores.size() != 1) {
-            return new JugadorNulo();
+            return JugadorNulo.INSTANCIA;
         }
 
         return ganadores.get(0);

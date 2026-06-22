@@ -14,7 +14,7 @@ public class Urna {
         this.votos = new ArrayList<>();
     }
 
-    public void registrarVoto(Jugador votador,Jugador votado) {
+    public void registrarVoto(Jugador votador, Jugador votado) {
         this.agregarVotado(votado);
         this.votos.add(new Voto(votador, votado));
     }
@@ -31,7 +31,7 @@ public class Urna {
                 votosMax = votosActuales;
                 ganadores.clear();
                 ganadores.add(v);
-            } else if ( votosActuales == votosMax ) {
+            } else if (votosActuales == votosMax) {
                 ganadores.add(v);
             }
         }
@@ -53,7 +53,8 @@ public class Urna {
     }
 
     private void agregarVotado(Jugador votado) {
-        if ( !this.fueVotado(votado) ){
+        if (!this.fueVotado(votado)) {
             votados.add(votado);
         }
-    }}
+    }
+}

@@ -6,10 +6,6 @@ public class BandoNulo implements Bando {
 
     public static final BandoNulo INSTANCIA = new BandoNulo();
 
-    private BandoNulo() {}
-
-    @Override
-    public boolean esMafia() {
-        return false;
+    private BandoNulo() {
     }
 }

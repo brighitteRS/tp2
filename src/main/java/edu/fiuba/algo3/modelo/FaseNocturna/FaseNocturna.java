@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.FaseNocturna;
 import edu.fiuba.algo3.modelo.Jugador;
 
 import java.util.List;
+
 public class FaseNocturna {
 
     private final List<Jugador> jugadoresNocturnos;
@@ -14,12 +15,16 @@ public class FaseNocturna {
     }
 
     public void ejecutar() {
-        Mafia mafia  = new Mafia();
 
-        mafia.actuarDeNoche(jugadoresNocturnos);
+        ResultadoNocturno resultado = new ResultadoNocturno();
+        Mafia mafia = new Mafia();
+
+        mafia.actuarDeNoche(jugadoresNocturnos, resultado);
 
         jugadoresNocturnos.forEach(
-                Jugador::actuarDeNoche
+                jugador -> jugador.actuarDeNoche(resultado)
         );
+
+        resultado.resolver();
     }
 }

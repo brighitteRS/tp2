@@ -4,7 +4,9 @@ import edu.fiuba.algo3.modelo.*;
 
 public class RolNulo extends Rol {
 
-    public RolNulo() {
+    public static final RolNulo INSTANCIA = new RolNulo();
+
+    private RolNulo() {
         super(BandoNulo.INSTANCIA);
     }
 
@@ -15,6 +17,5 @@ public class RolNulo extends Rol {
 
     @Override
     protected void ejecutoEleccion(Jugador objetivo) {
-        // no hace nada
     }
 }

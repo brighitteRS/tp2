@@ -4,10 +4,6 @@ public class BandoMafia implements Bando {
 
     public static final BandoMafia INSTANCIA = new BandoMafia();
 
-    private BandoMafia() {}
-
-    @Override
-    public boolean esMafia() {
-        return true;
+    private BandoMafia() {
     }
 }

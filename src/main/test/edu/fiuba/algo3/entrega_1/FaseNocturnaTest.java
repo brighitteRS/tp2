@@ -14,12 +14,13 @@ public class FaseNocturnaTest {
     public void laMafiaSeleccionaUnaVictimaValidaDuranteLaNoche() {
 
         Jugador victima = new Jugador(new Ciudadano());
+        ResultadoNocturno resultado = new ResultadoNocturno();
 
         Jugador mafioso1 = new Jugador(new Mafioso());
         Mafia mafia = new Mafia();
         mafioso1.elegir(victima);
 
-        mafia.actuarDeNoche(List.of(mafioso1));
+        mafia.actuarDeNoche(List.of(mafioso1),resultado);
 
         assertEquals(victima, mafia.obtenerResolucion());
     }

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.NullPattern.BandoNulo;
 import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 
 public class Mafioso extends Rol {
@@ -11,9 +12,14 @@ public class Mafioso extends Rol {
         super(BandoMafia.INSTANCIA);
     }
 
+
     @Override
     public Bando revelarBandoA(Jugador solicitante) {
-        return revelarBando();
+
+        if (solicitante.esDeLaMafia()) {
+            return revelarBando();}
+
+        return BandoNulo.INSTANCIA;
     }
 
     @Override

@@ -6,11 +6,11 @@ public class Muerto implements EstadoJugador {
         return false;
     }
 
-    @Override
+    /*@Override
     public boolean puedeVerRol(Jugador objetivo) {
         //hay que revisarlo porque cuando muere pasaba algo
         return true;
-    }
+    }*/
     @Override
     public void actuarDeNoche(Rol rol) {
     }

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Mazo;
 
 import edu.fiuba.algo3.modelo.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mazo {
@@ -14,19 +15,15 @@ public class Mazo {
         this.mezclador = mezclador;
     }
 
-    public static Mazo crear(int jugadores, Mezclador mezclador) {
+    public static Mazo crear(int cantidadJugadores, Mezclador mezclador) {
 
-        EstrategiaDeComposicion estrategia =
-                FabricaDeComposicion.crear(jugadores);
-
-        List<Rol> roles =
-                estrategia.crearRoles(jugadores);
-
-        return new Mazo(roles, mezclador);
+        EstrategiaDeComposicion estrategia = FabricaDeComposicion.crear(cantidadJugadores);
+        List<Rol> cartas = estrategia.crearRoles(cantidadJugadores);
+        return new Mazo(cartas, mezclador);
     }
 
-    public static Mazo crear(int jugadores) {
-        return Mazo.crear(jugadores, new Aleatorio());
+    public static Mazo crear(int cantidadJugadores) {
+        return Mazo.crear(cantidadJugadores, new Aleatorio());
     }
 
     public int contarRolesDe(Class<?> tipo) {
@@ -44,11 +41,12 @@ public class Mazo {
         return cartas.size();
     }
 
-    /*public void repartir(List<Jugador> jugadores) {
-        mezclador.mezclar(cartas);
+    // en teoria es solo para los test. repartir no deberia crear a los jugadores (preguntar a ignacio antes de tocar)
+    public void repartir(int cantidadJugadores,List<Jugador> jugadores) {
 
-        for (int i = 0; i < jugadores.size(); i++) {
-            jugadores.get(i).asignarRol(cartas.get(i));
+        mezclador.mezclar(cartas);
+        for (int i = 0; i < cantidadJugadores; i++) {
+            jugadores.add(new Jugador(cartas.get(i)));
         }
-    }*/
+    }
 }

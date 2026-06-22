@@ -17,16 +17,28 @@ public class Jugador {
     }
 
     public Bando consultarBando(Jugador solicitante) {
+        if (solicitante == this || !estaVivo()) {
+            return rol.revelarBando();
+        }
         return rol.revelarBandoA(solicitante);
     }
 
-    public Rol consultarRol(Jugador solicitante) {
-        return solicitante.puedeVerRol(this) ? rol : new RolNulo();
+    public Bando revelarBandoReal() {
+        return rol.revelarBandoParaInvestigacion();
     }
 
-    public boolean puedeVerRol(Jugador objetivo) {
-        return estado.puedeVerRol(objetivo);
+    public Rol consultarRol(Jugador solicitante) {
+        if (solicitante == this || !estaVivo()) {
+            return rol;
+        }
+        return new RolNulo();
     }
+
+    //usar consultar rol (preguntar a ignacio cualquier cosa)
+
+    /*public boolean puedeVerRol(Jugador objetivo) {
+        return estado.puedeVerRol(objetivo);
+    }*/
 
     public Rol getRol() {
         return rol;

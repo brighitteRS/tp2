@@ -6,10 +6,10 @@ public class Vivo implements EstadoJugador {
         return objetivo.estaVivo();
     }
 
-    @Override
+    /*@Override
     public boolean puedeVerRol(Jugador objetivo) {
         return false;
-    }
+    }*/
 
     @Override
     public void actuarDeNoche(Rol rol) {

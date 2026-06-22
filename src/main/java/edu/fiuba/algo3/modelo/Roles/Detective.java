@@ -31,7 +31,7 @@ public class Detective extends Rol {
     //solucionar el tema del null(aplicar tdd para solucionar el bug)
     @Override
     public void actuarDeNoche() {
-        resultado = investigado.consultarBando(investigado);
+        resultado = investigado.revelarBandoReal();
         investigado = new JugadorNulo();
     }
 

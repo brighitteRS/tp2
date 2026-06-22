@@ -17,6 +17,10 @@ public abstract class Rol {
 
     public abstract Bando revelarBandoA(Jugador solicitante);
 
+    public Bando revelarBandoParaInvestigacion() {
+        return revelarBando();
+    }
+
     public boolean esDeLaMafia() {
         return bando.esMafia();
     }

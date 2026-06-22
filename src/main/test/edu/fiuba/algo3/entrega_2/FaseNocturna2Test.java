@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
 import edu.fiuba.algo3.modelo.Roles.*;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.*;
@@ -11,32 +12,37 @@ public class FaseNocturna2Test {
     public void elDetectiveRecibeResultadoCorrectoAlInvestigarMafioso() {
 
         Jugador mafioso = new Jugador(new Mafioso());
-        Detective detective = new Detective(); //tiene q ser um jugador
+        Jugador detective = new Jugador(new Detective()); //tiene q ser um jugador
+        ResultadoNocturno resultado = new ResultadoNocturno();
 
-        detective.elegirInvestigado(mafioso);
-        detective.actuarDeNoche();
+        detective.elegir(mafioso);
+        detective.actuarDeNoche(resultado);
         // no debe ser bando un string (no usar dato primitivo)
-        assertEquals("Mafia", detective.resultadoInvestigacion());
+        assertEquals(BandoMafia.INSTANCIA,detective.resultadoInvestigacion());
     }
 
     @Test
     public void elDetectiveRecibeResultadoCorrectoAlInvestigarCiudadano() {
 
         Jugador ciudadano = new Jugador(new Ciudadano());
-        Detective detective = new Detective();
-        detective.elegirInvestigado(ciudadano);
-        detective.actuarDeNoche();
-        assertEquals("Ciudadano", detective.resultadoInvestigacion());
+        Jugador detective = new Jugador(new Detective());
+        ResultadoNocturno resultado = new ResultadoNocturno();
+
+        detective.elegir(ciudadano);
+        detective.actuarDeNoche(resultado);
+        assertEquals(BandoCiudadano.INSTANCIA,detective.resultadoInvestigacion());
     }
 
     @Test
     public void elDetectiveRecibeAlPadrinoComoCiudadano() {
 
         Jugador padrino = new Jugador(new Padrino());
-        Detective detective = new Detective();
-        detective.elegirInvestigado(padrino);
-        detective.actuarDeNoche();
-        assertEquals("Ciudadano", detective.resultadoInvestigacion());
+        Jugador detective = new Jugador(new Detective());
+        ResultadoNocturno resultado = new ResultadoNocturno();
+
+        detective.elegir(padrino);
+        detective.actuarDeNoche(resultado);
+        assertEquals(BandoCiudadano.INSTANCIA,detective.resultadoInvestigacion());
     }
 
     @Test
@@ -46,9 +52,9 @@ public class FaseNocturna2Test {
 
         Detective detective = new Detective();
 
-        assertDoesNotThrow(() -> detective.elegirInvestigado(objetivo));
+        assertDoesNotThrow(() -> detective.elegir(objetivo));
 
-        assertThrows(IllegalArgumentException.class, () -> detective.elegirInvestigado(objetivo));
+        assertThrows(IllegalArgumentException.class, () -> detective.elegir(objetivo));
     }
 
     @Test
@@ -58,9 +64,9 @@ public class FaseNocturna2Test {
 
         Medico medico = new Medico();
 
-        assertDoesNotThrow(() -> medico.elegirProtegido(objetivo));
+        assertDoesNotThrow(() -> medico.elegir(objetivo));
 
-        assertThrows(IllegalArgumentException.class, () -> medico.elegirProtegido(objetivo));
+        assertThrows(IllegalArgumentException.class, () -> medico.elegir(objetivo));
     }
     //codigo repetido en elegir (medico y detective) hacer refactor
 }

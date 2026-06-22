@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
 import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 
+import java.util.List;
+
 public class Jugador {
 
     private final Rol rol;
@@ -54,6 +56,11 @@ public class Jugador {
 
     public void validarPuedeSerVictimaDeMafia() {
         estado.validarPuedeSerVictimaDeMafia(rol);
+    }
+
+
+    public void reconocerComplices(List<Jugador> complices) {
+        rol.reconocerComplices(complices);
     }
 
     /*

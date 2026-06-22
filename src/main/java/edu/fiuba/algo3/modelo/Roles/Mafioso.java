@@ -10,13 +10,13 @@ import java.util.List;
 public class Mafioso extends Rol {
 
     private List<Jugador> complices = new ArrayList<>();
-    private Jugador victimaElegida = new JugadorNulo();
+    private Jugador victimaElegida = JugadorNulo.INSTANCIA;
 
     public Mafioso() {
         super(BandoMafia.INSTANCIA);
     }
 
-    //usarlo en partida
+    //usarlo en partida (ver como implementarlo bien) preguntar a ignacio
     public void reconocerComplices(List<Jugador> complices) {
         this.complices = complices;
     }
@@ -29,7 +29,7 @@ public class Mafioso extends Rol {
     @Override
     public Bando revelarBandoA(Jugador solicitante) {
 
-        if (solicitante.esDeLaMafia()) { //usar escomplice
+        if (esComplice(solicitante)) {
             return revelarBando();}
 
         return BandoNulo.INSTANCIA;
@@ -37,7 +37,7 @@ public class Mafioso extends Rol {
 
     @Override
     protected void ejecutoEleccion(Jugador objetivo) {
-        if (objetivo.esDeLaMafia()) {
+        if (esComplice(objetivo)) {
             throw new IllegalArgumentException();
         }
         victimaElegida = objetivo;

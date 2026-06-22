@@ -3,6 +3,8 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
 import edu.fiuba.algo3.modelo.NullPattern.*;
 
+import java.util.List;
+
 public abstract class Rol {
     private final Bando bando;
 
@@ -34,5 +36,8 @@ public abstract class Rol {
     }
 
     public void validarPuedeSerVictimaDeMafia() {
+    }
+
+    public void reconocerComplices(List<Jugador> complices) {
     }
 }

@@ -12,9 +12,9 @@ import java.util.List;
 public class ComposicionDe5a6Jugadores implements EstrategiaDeComposicion {
 
     @Override
-    public List<Rol> crearRoles(int jugadores) {
-        List<Rol> roles = new ArrayList<>();
+    public List<Rol> crearRoles(int cantidadJugadores) {
 
+        List<Rol> roles = new ArrayList<>();
         roles.add(new Mafioso());
 
         if (Math.random() < 0.5)
@@ -22,7 +22,12 @@ public class ComposicionDe5a6Jugadores implements EstrategiaDeComposicion {
         else
             roles.add(new Medico());
 
-        while (roles.size() < jugadores) {
+        if (Math.random() < 0.5)
+            roles.add(new Mafioso());
+        else
+            roles.add(new Ciudadano());
+
+        while (roles.size() < cantidadJugadores) {
             roles.add(new Ciudadano());
         }
 

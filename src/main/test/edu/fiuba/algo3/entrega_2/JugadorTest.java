@@ -16,7 +16,7 @@ public class JugadorTest {
         Jugador jugador2 = new Jugador(new Ciudadano());
 
         // Act
-        victima.cambiarEstado(new Muerto());
+        victima.eliminar();
 
         // Assert
         assertEquals(rolCiudadano, victima.consultarRol(jugador2));
@@ -29,7 +29,7 @@ public class JugadorTest {
         // Arrange
         Jugador mafioso = new Jugador(new Mafioso());
         Jugador victima = new Jugador(new Ciudadano());
-        mafioso.cambiarEstado(new Muerto());
+        mafioso.eliminar();
 
         // Assert
         assertThrows(IllegalStateException.class, () -> {

@@ -8,18 +8,16 @@ public class FaseNocturna {
 
     private final List<Jugador> jugadoresNocturnos;
 
-    public FaseNocturna(
-            List<Jugador> jugadoresNocturnos) {
-
+    public FaseNocturna(List<Jugador> jugadoresNocturnos) {
         this.jugadoresNocturnos = jugadoresNocturnos;
     }
 
     public void ejecutar() {
 
         ResultadoNocturno resultado = new ResultadoNocturno();
-        Mafia mafia = new Mafia();
+        Mafia mafia = new Mafia(jugadoresNocturnos);
 
-        mafia.actuarDeNoche(jugadoresNocturnos, resultado);
+        mafia.actuarDeNoche(resultado);
 
         jugadoresNocturnos.forEach(
                 jugador -> jugador.actuarDeNoche(resultado)

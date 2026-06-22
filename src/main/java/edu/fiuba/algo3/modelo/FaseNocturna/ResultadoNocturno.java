@@ -24,8 +24,6 @@ public class ResultadoNocturno {
 
         victimas.removeAll(protegidos);
 
-        victimas.forEach(
-                jugador -> jugador.cambiarEstado(new Muerto())
-        );
+        victimas.forEach(Jugador::eliminar);
     }
 }

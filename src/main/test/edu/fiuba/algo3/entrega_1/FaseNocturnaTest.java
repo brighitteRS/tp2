@@ -17,10 +17,10 @@ public class FaseNocturnaTest {
         ResultadoNocturno resultado = new ResultadoNocturno();
 
         Jugador mafioso1 = new Jugador(new Mafioso());
-        Mafia mafia = new Mafia();
+        Mafia mafia = new Mafia(List.of(mafioso1));
         mafioso1.elegir(victima);
 
-        mafia.actuarDeNoche(List.of(mafioso1),resultado);
+        mafia.actuarDeNoche(resultado);
 
         assertEquals(victima, mafia.obtenerResolucion());
     }
@@ -29,7 +29,7 @@ public class FaseNocturnaTest {
     public void laMafiaRechazaVictimasInvalidas() {
 
         Jugador jugador = new Jugador(new Ciudadano());
-        jugador.cambiarEstado(new Muerto());
+        jugador.eliminar();
 
         Jugador mafioso = new Jugador(new Mafioso());
 
@@ -80,4 +80,70 @@ public class FaseNocturnaTest {
         assertFalse(victima.estaVivo());
         assertTrue(protegido.estaVivo());
     }
+
+    @Test
+    public void elPadrinoDesempataLaVotacionDeLaMafia() {
+
+        Jugador juan = new Jugador(new Ciudadano());
+        Jugador pedro = new Jugador(new Ciudadano());
+
+        Jugador mafioso = new Jugador(new Mafioso());
+        Jugador padrino = new Jugador(new Padrino());
+
+        mafioso.elegir(juan);
+        padrino.elegir(pedro);
+
+        ResultadoNocturno resultado = new ResultadoNocturno();
+        Mafia mafia = new Mafia(List.of(mafioso, padrino));
+
+        mafia.actuarDeNoche(resultado);
+
+        assertEquals(pedro, mafia.obtenerResolucion());
+    }
+
+    @Test
+    public void siTodosLosMafiososVotanDistintoDecideElPadrino() {
+
+        Jugador juan = new Jugador(new Ciudadano());
+        Jugador pedro = new Jugador(new Ciudadano());
+        Jugador maria = new Jugador(new Ciudadano());
+
+        Jugador mafioso1 = new Jugador(new Mafioso());
+        Jugador mafioso2 = new Jugador(new Mafioso());
+        Jugador padrino = new Jugador(new Padrino());
+
+        mafioso1.elegir(juan);
+        mafioso2.elegir(pedro);
+        padrino.elegir(maria);
+
+        ResultadoNocturno resultado = new ResultadoNocturno();
+        Mafia mafia = new Mafia(List.of(mafioso1, mafioso2, padrino));
+
+        mafia.actuarDeNoche(resultado);
+
+        assertEquals(maria, mafia.obtenerResolucion());
+    }
+
+    @Test
+    public void elVotoDelPadrinoNoModificaUnaVotacionConMayoria() {
+
+        Jugador juan = new Jugador(new Ciudadano());
+        Jugador pedro = new Jugador(new Ciudadano());
+
+        Jugador mafioso1 = new Jugador(new Mafioso());
+        Jugador mafioso2 = new Jugador(new Mafioso());
+        Jugador padrino = new Jugador(new Padrino());
+
+        mafioso1.elegir(juan);
+        mafioso2.elegir(juan);
+        padrino.elegir(pedro);
+
+        ResultadoNocturno resultado = new ResultadoNocturno();
+        Mafia mafia = new Mafia(List.of(mafioso1, mafioso2, padrino));
+
+        mafia.actuarDeNoche(resultado);
+
+        assertEquals(juan, mafia.obtenerResolucion());
+    }
+
 }

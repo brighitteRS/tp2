@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
+import edu.fiuba.algo3.modelo.Urna.Urna;
 
 public class Mafioso extends Rol {
 
@@ -19,6 +20,11 @@ public class Mafioso extends Rol {
     protected void ejecutoEleccion(Jugador objetivo) {
         objetivo.validarPuedeSerVictimaDeMafia();
         victimaElegida = objetivo;
+    }
+
+    @Override
+    public void votar(Jugador self, Urna urna) {
+        urna.registrarVoto(self, victimaElegida);
     }
 
     @Override

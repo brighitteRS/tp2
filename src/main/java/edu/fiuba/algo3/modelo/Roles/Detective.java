@@ -31,10 +31,9 @@ public class Detective extends Rol {
         investigado = objetivo;
     }
 
-    //solucionar el tema del null(aplicar tdd para solucionar el bug)
     @Override
     public void actuarDeNoche(ResultadoNocturno resultado) {
-        this.resultado = investigado.consultarBando(investigado);
+        this.resultado = investigado.revelarBandoAInvestigacion();
         investigado = JugadorNulo.INSTANCIA;
     }
 

@@ -2,24 +2,15 @@ package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
 
-public class Padrino extends Rol {
-    public Padrino() {
-        super(BandoMafia.INSTANCIA);
-    }
+public class Padrino extends Mafioso {
 
-    //para que los mafiosos se conozcan
-    //Bri: Marque ese tema en el test que creaste, leelo y decime que opinas
     @Override
-    public Bando revelarBandoA(Jugador solicitante) {
+    public Bando revelarBandoInvestigado() {
         return BandoCiudadano.INSTANCIA;
     }
 
     @Override
-    protected void ejecutoEleccion(Jugador objetivo) {
-    }
-
-    @Override
-    public void validarPuedeSerVictimaDeMafia() {
-        throw new IllegalArgumentException();
+    public Jugador votoPrioritario() {
+        return obtenerVictima();
     }
 }

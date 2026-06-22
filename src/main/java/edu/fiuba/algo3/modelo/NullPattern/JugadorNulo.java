@@ -16,17 +16,17 @@ public class JugadorNulo extends Jugador {
     public boolean estaVivo() {
         return false;
     }
-    @Override
-    public void cambiarEstado(EstadoJugador nuevoEstado) {
-    }
 
     @Override
     public void elegir(Jugador objetivo) {
     }
 
     @Override
-    public boolean estaNulo() {
-        return true;
+    public void guardarVotoNocturno(Urna urna) {
     }
-    public void registrarVotoEn(Urna urna, Jugador votado) {}
+
+    @Override
+    public Jugador obtenerVotoPrioritario() {
+        return this;
+    }
 }

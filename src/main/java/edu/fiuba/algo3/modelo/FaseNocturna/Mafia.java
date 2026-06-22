@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.FaseNocturna;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
+import edu.fiuba.algo3.modelo.NullPattern.*;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 
 import java.util.List;
@@ -9,43 +9,53 @@ import java.util.List;
 public class Mafia {
 
     private final Urna urna = new Urna();
+    private final List<Jugador> jugadores;
 
-    public void actuarDeNoche(List<Jugador> jugadores, ResultadoNocturno resultado) {
+    public Mafia(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
 
-        recolectarVotos(jugadores);
+    public void actuarDeNoche(ResultadoNocturno resultado) {
 
+        recolectarVotos();
         resolverResultado(resultado);
     }
 
-    private void recolectarVotos(List<Jugador> jugadores) {
-
+    private void recolectarVotos() {
         for (Jugador jugador : jugadores) {
-
-            Jugador victima = jugador.obtenerVictima();
-
-            if (victima.estaNulo()) continue;
-
-            urna.registrarVoto(jugador, victima);
+            jugador.guardarVotoNocturno(urna);
         }
     }
 
     private void resolverResultado(ResultadoNocturno resultado) {
-
-        Jugador victima = obtenerResolucion();
-
-        if (victima.estaNulo()) return;
-
-        resultado.registrarAtaque(victima);
+        resultado.registrarAtaque(obtenerResolucion());
     }
 
     public Jugador obtenerResolucion() {
-
         List<Jugador> ganadores = urna.getGanadores();
 
-        if (ganadores.size() != 1) {
+        if (ganadores.isEmpty()) {
             return JugadorNulo.INSTANCIA;
         }
 
-        return ganadores.get(0);
+        if (ganadores.size() == 1) {
+            return ganadores.get(0);
+        }
+
+        return resolverEmpate(ganadores);
+    }
+
+    private Jugador resolverEmpate(List<Jugador> ganadores) {
+
+        for (Jugador jugador : jugadores) {
+
+            Jugador voto = jugador.obtenerVotoPrioritario();
+
+            if (ganadores.contains(voto)) {
+                return voto;
+            }
+        }
+
+        return JugadorNulo.INSTANCIA;
     }
 }

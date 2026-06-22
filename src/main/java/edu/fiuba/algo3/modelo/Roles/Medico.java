@@ -21,7 +21,7 @@ public class Medico extends Rol {
     @Override
     protected void ejecutoEleccion(Jugador objetivo) {
 
-        if (objetivo.equals(ultimoProtegido)) {
+        if (objetivo == ultimoProtegido) {
             throw new IllegalArgumentException();
         }
 

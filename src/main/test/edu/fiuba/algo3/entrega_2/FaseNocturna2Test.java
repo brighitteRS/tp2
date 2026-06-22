@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
 import edu.fiuba.algo3.modelo.Roles.*;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.*;
@@ -12,9 +13,10 @@ public class FaseNocturna2Test {
 
         Jugador mafioso = new Jugador(new Mafioso());
         Jugador detective = new Jugador(new Detective()); //tiene q ser um jugador
+        ResultadoNocturno resultado = new ResultadoNocturno();
 
         detective.elegir(mafioso);
-        detective.actuarDeNoche();
+        detective.actuarDeNoche(resultado);
         // no debe ser bando un string (no usar dato primitivo)
         assertEquals(BandoMafia.INSTANCIA,detective.resultadoInvestigacion());
     }
@@ -24,9 +26,10 @@ public class FaseNocturna2Test {
 
         Jugador ciudadano = new Jugador(new Ciudadano());
         Jugador detective = new Jugador(new Detective());
+        ResultadoNocturno resultado = new ResultadoNocturno();
 
         detective.elegir(ciudadano);
-        detective.actuarDeNoche();
+        detective.actuarDeNoche(resultado);
         assertEquals(BandoCiudadano.INSTANCIA,detective.resultadoInvestigacion());
     }
 
@@ -35,8 +38,10 @@ public class FaseNocturna2Test {
 
         Jugador padrino = new Jugador(new Padrino());
         Jugador detective = new Jugador(new Detective());
+        ResultadoNocturno resultado = new ResultadoNocturno();
+
         detective.elegir(padrino);
-        detective.actuarDeNoche();
+        detective.actuarDeNoche(resultado);
         assertEquals(BandoCiudadano.INSTANCIA,detective.resultadoInvestigacion());
     }
 

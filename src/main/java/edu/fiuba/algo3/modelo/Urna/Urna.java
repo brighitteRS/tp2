@@ -56,4 +56,4 @@ public class Urna {
         if ( !this.fueVotado(votado) ){
             votados.add(votado);
         }
-    }}
+}}

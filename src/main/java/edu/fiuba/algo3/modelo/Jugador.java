@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.NullPattern.RolNulo;
+import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
+import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
+import edu.fiuba.algo3.modelo.Urna.Urna;
 
 public class Jugador {
 
@@ -17,45 +19,44 @@ public class Jugador {
     }
 
     public Bando consultarBando(Jugador solicitante) {
-        if (solicitante == this || !estaVivo()) {
-            return rol.revelarBando();
-        }
-        return rol.revelarBandoA(solicitante);
-    }
 
-    public Bando revelarBandoReal() {
-        return rol.revelarBandoParaInvestigacion();
+        return estado.consultarBando(rol, this, solicitante);
     }
 
     public Rol consultarRol(Jugador solicitante) {
-        if (solicitante == this || !estaVivo()) {
-            return rol;
-        }
-        return new RolNulo();
-    }
 
-    //usar consultar rol (preguntar a ignacio cualquier cosa)
-
-    /*public boolean puedeVerRol(Jugador objetivo) {
-        return estado.puedeVerRol(objetivo);
-    }*/
-
-    public Rol getRol() {
-        return rol;
+        return estado.consultarRol(rol, this, solicitante);
     }
 
     public void cambiarEstado(EstadoJugador nuevoEstado) {
         this.estado = nuevoEstado;
     }
 
-    public boolean esDeLaMafia() {
-        return rol.esDeLaMafia();
+    public void actuarDeNoche(ResultadoNocturno resultado) {
+        estado.actuarDeNoche(rol,resultado);
     }
 
-    public void actuarDeNoche() {
-        estado.actuarDeNoche(rol);
+    public void elegir(Jugador objetivo) {
+        estado.ejecutarEleccion(rol, objetivo);
     }
-/*
+
+    public Jugador obtenerVictima() {
+        return estado.obtenerVictima(rol);
+    }
+
+    public Bando resultadoInvestigacion() {
+        return rol.obtenerResultado();
+    }
+
+    public boolean estaNulo() {
+        return false;
+    }
+
+    public void validarPuedeSerVictimaDeMafia() {
+        estado.validarPuedeSerVictimaDeMafia(rol);
+    }
+
+    /*
     public void votar(Urna urna, Jugador votado) {
         if ( !this.estaVivo() ) {
             throw new UnsupportedOperationException("Un jugador muerto no puede votar");
@@ -69,19 +70,9 @@ public class Jugador {
         }
     }*/
 
-    public void elegir(Jugador objetivo){
-        estado.ejecutarEleccion(rol,objetivo);
-    }
+    //usar consultar rol (preguntar a ignacio cualquier cosa)
 
-    public Jugador obtenerVictima() {
-        return rol.obtenerVictima();
-    }
-
-    public Bando resultadoInvestigacion() {
-        return rol.obtenerResultado();
-    }
-
-    public boolean estaNulo() {
-        return false;
-    }
+    /*public boolean puedeVerRol(Jugador objetivo) {
+        return estado.puedeVerRol(objetivo);
+    }*/
 }

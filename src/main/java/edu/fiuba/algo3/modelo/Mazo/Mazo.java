@@ -42,7 +42,7 @@ public class Mazo {
     }
 
     // en teoria es solo para los test. repartir no deberia crear a los jugadores (preguntar a ignacio antes de tocar)
-    public void repartir(int cantidadJugadores,List<Jugador> jugadores) {
+    public void repartir(int cantidadJugadores, List<Jugador> jugadores) {
 
         mezclador.mezclar(cartas);
         for (int i = 0; i < cantidadJugadores; i++) {

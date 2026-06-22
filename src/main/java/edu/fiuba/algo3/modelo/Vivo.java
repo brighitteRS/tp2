@@ -1,19 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
+import edu.fiuba.algo3.modelo.NullPattern.RolNulo;
+
 public class Vivo implements EstadoJugador {
-    @Override
-    public boolean puedeInteractuarCon(Jugador objetivo) {
-        return objetivo.estaVivo();
-    }
-
-    /*@Override
-    public boolean puedeVerRol(Jugador objetivo) {
-        return false;
-    }*/
 
     @Override
-    public void actuarDeNoche(Rol rol) {
-        rol.actuarDeNoche();
+    public void actuarDeNoche(Rol rol, ResultadoNocturno resultado) {
+        rol.actuarDeNoche(resultado);
     }
 
     @Override
@@ -23,10 +17,30 @@ public class Vivo implements EstadoJugador {
 
     @Override
     public void ejecutarEleccion(Rol rol, Jugador objetivo) {
-        if (!puedeInteractuarCon(objetivo)) {
-            throw new IllegalArgumentException();
-        }
-
         rol.elegir(objetivo);
+    }
+
+    @Override
+    public Jugador obtenerVictima(Rol rol) {
+        return rol.obtenerVictima();
+    }
+
+    @Override
+    public Bando consultarBando(Rol rol, Jugador propietario, Jugador solicitante) {
+        return rol.revelarBandoA(solicitante);
+    }
+
+    @Override
+    public Rol consultarRol(Rol rol, Jugador propietario, Jugador solicitante) {
+
+        if (solicitante == propietario) {
+            return rol;
+        }
+        return RolNulo.INSTANCIA;
+    }
+
+    @Override
+    public void validarPuedeSerVictimaDeMafia(Rol rol) {
+        rol.validarPuedeSerVictimaDeMafia();
     }
 }

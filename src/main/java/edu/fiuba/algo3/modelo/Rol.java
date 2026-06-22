@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-
-import edu.fiuba.algo3.modelo.NullPattern.BandoNulo;
-import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
+import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
+import edu.fiuba.algo3.modelo.NullPattern.*;
 
 public abstract class Rol {
     private final Bando bando;
@@ -17,15 +16,7 @@ public abstract class Rol {
 
     public abstract Bando revelarBandoA(Jugador solicitante);
 
-    public Bando revelarBandoParaInvestigacion() {
-        return revelarBando();
-    }
-
-    public boolean esDeLaMafia() {
-        return bando.esMafia();
-    }
-
-    public void actuarDeNoche() {
+    public void actuarDeNoche(ResultadoNocturno resultado) {
     }
 
     public void elegir(Jugador objetivo) {
@@ -35,10 +26,13 @@ public abstract class Rol {
     protected abstract void ejecutoEleccion(Jugador objetivo);
 
     public Jugador obtenerVictima() {
-        return new JugadorNulo();
+        return JugadorNulo.INSTANCIA;
     }
 
     public Bando obtenerResultado() {
         return BandoNulo.INSTANCIA;
+    }
+
+    public void validarPuedeSerVictimaDeMafia() {
     }
 }

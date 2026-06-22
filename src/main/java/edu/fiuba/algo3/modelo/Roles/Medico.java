@@ -1,12 +1,13 @@
 package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
 import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 
 public class Medico extends Rol {
 
-    private Jugador ultimoProtegido = new JugadorNulo();
-    private Jugador protegido = new JugadorNulo();
+    private Jugador ultimoProtegido = JugadorNulo.INSTANCIA;
+    private Jugador protegido = JugadorNulo.INSTANCIA;
 
     public Medico() {
         super(BandoCiudadano.INSTANCIA);
@@ -29,9 +30,8 @@ public class Medico extends Rol {
     }
 
     @Override
-    public void actuarDeNoche() {
-        protegido.cambiarEstado(new Vivo());
-        protegido = new JugadorNulo();
+    public void actuarDeNoche(ResultadoNocturno resultado) {
+        resultado.registrarProteccion(protegido);
+        protegido = JugadorNulo.INSTANCIA;
     }
-
 }

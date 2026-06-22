@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Mazo.*;
 import edu.fiuba.algo3.modelo.NullPattern.BandoNulo;
+import edu.fiuba.algo3.modelo.NullPattern.RolNulo;
 import edu.fiuba.algo3.modelo.Roles.Ciudadano;
 import edu.fiuba.algo3.modelo.Roles.Detective;
 import edu.fiuba.algo3.modelo.Roles.Mafioso;
@@ -69,19 +70,35 @@ public class MazoTest {
         assertEquals(6, jugadores.size());
     }
 
-
     @Test
     public void test04JugadorSoloPuedeVerSuPropioRol() {
 
         Jugador ciudadano1 = new Jugador(new Ciudadano());
         Jugador ciudadano2 = new Jugador(new Ciudadano());
 
-        Bando bandoPropio = ciudadano1.consultarBando(ciudadano1);
-        Bando bandoAjeno = ciudadano1.consultarBando(ciudadano2);
+        Rol rolPropio = ciudadano1.consultarRol(ciudadano1);
+        Rol rolAjeno = ciudadano1.consultarRol(ciudadano2);
 
-        assertEquals(BandoCiudadano.INSTANCIA, bandoPropio);
-        assertEquals(BandoNulo.INSTANCIA, bandoAjeno);
+        //no se si es lo mejor tener un getClass sino podemos preguntarle al jugador
+        //si puedo ver su rol aunq esta comparacion es mas exacta la vd
+        assertEquals(Ciudadano.class, rolPropio.getClass());
+        assertEquals(RolNulo.INSTANCIA, rolAjeno);
     }
+
+    //este test no se si es de bando sino poder preguntarle a un jugador si otro jugador es su
+    //complice, por eso cada jugador mafioso o padrino debe almacenar sus complices y poder hacer
+
+    /*@Test
+    public void test05MafiososSeConocenEntreEllos() {
+        // Arrange
+        Jugador mafioso1 = new Jugador(new Mafioso());
+        Jugador mafioso2 = new Jugador(new Mafioso());
+        Jugador ciudadano = new Jugador(new Ciudadano());
+
+        // Assert
+        assertTrue(mafioso1.conocesA(mafioso2));
+        assertFalse(mafioso1.conocesA(ciudadano));
+    }*/
 
     @Test
     public void test05MafiososSeConocenEntreEllos() {

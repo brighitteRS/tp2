@@ -25,7 +25,7 @@ public class MazoTest {
     public void test01MazoConSeisJugadoresTieneComposicionCorrecta() {
 
         // Arrange
-        Mazo mazo = Mazo.crear(6, new Aleatorio());
+        Mazo mazo = new Mazo(6);
 
         // Act
         long mafiosos = mazo.contarRolesDe(Mafioso.class);
@@ -62,7 +62,7 @@ public class MazoTest {
     @Test
     public void test03CadaJugadorRecibeUnRol() {
 
-        Mazo mazo = Mazo.crear(6);
+        Mazo mazo = new Mazo(6);
         List<Jugador> jugadores = new ArrayList<>();
 
         mazo.repartir(6, jugadores);

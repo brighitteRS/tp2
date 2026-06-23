@@ -15,15 +15,11 @@ public class Mazo {
         this.mezclador = mezclador;
     }
 
-    public static Mazo crear(int cantidadJugadores, Mezclador mezclador) {
-
-        EstrategiaDeComposicion estrategia = FabricaDeComposicion.crear(cantidadJugadores);
-        List<Rol> cartas = estrategia.crearRoles(cantidadJugadores);
-        return new Mazo(cartas, mezclador);
-    }
-
-    public static Mazo crear(int cantidadJugadores) {
-        return Mazo.crear(cantidadJugadores, new Aleatorio());
+    public Mazo(int cantJugadores) {
+        
+        this.mezclador = new Aleatorio();
+        EstrategiaDeComposicion estrategia = FabricaDeComposicion.crear(cantJugadores);
+        this.cartas = estrategia.crearRoles(cantJugadores);
     }
 
     public int contarRolesDe(Class<?> tipo) {

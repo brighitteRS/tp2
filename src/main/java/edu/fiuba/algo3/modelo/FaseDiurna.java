@@ -1,11 +1,12 @@
 /*package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 
 import java.util.List;
 
-public class FaseDiurna {
+public class FaseDiurna implements Fase{
 
     private Urna urna;
     private SistemaNominaciones nominaciones;
@@ -57,7 +58,7 @@ public class FaseDiurna {
         }
 
         Jugador eliminado = ganadores.get(0);
-        eliminado.cambiarEstado(new Muerto());
+        eliminado.eliminar();
         return eliminado;
     }
 
@@ -65,5 +66,9 @@ public class FaseDiurna {
         return nominaciones.obtenerCandidatos();
     }
 
-}
-*/
+    /*@Override
+    public Ronda actualizar(Ronda ronda) {
+        return ronda.siguiente();
+    }
+
+}*/

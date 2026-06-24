@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.FaseNocturna;
 
-import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +24,6 @@ public class ResultadoNocturno {
 
         victimas.removeAll(protegidos);
 
-        victimas.forEach(
-                jugador -> jugador.cambiarEstado(new Muerto())
-        );
+        victimas.forEach(Jugador::eliminar);
     }
 }

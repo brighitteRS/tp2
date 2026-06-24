@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.NullPattern;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.Rol;
 
 public class RolNulo extends Rol {
 
@@ -16,6 +18,6 @@ public class RolNulo extends Rol {
     }
 
     @Override
-    protected void ejecutoEleccion(Jugador objetivo) {
+    protected void elegirObjetivo(Jugador objetivo) {
     }
 }

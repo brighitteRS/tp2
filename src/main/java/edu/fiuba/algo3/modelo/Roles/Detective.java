@@ -2,8 +2,9 @@ package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
-import edu.fiuba.algo3.modelo.NullPattern.BandoNulo;
-import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.Rol;
+import edu.fiuba.algo3.modelo.NullPattern.*;
 
 public class Detective extends Rol {
 
@@ -21,7 +22,7 @@ public class Detective extends Rol {
     }
 
     @Override
-    protected void ejecutoEleccion(Jugador objetivo) {
+    protected void elegirObjetivo(Jugador objetivo) {
 
         if (objetivo == ultimoInvestigado) {
             throw new IllegalArgumentException();

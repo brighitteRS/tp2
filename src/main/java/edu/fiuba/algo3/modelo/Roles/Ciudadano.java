@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.Rol;
 
 public class Ciudadano extends Rol {
     public Ciudadano() {
@@ -13,6 +15,6 @@ public class Ciudadano extends Rol {
     }
 
     @Override
-    protected void ejecutoEleccion(Jugador objetivo) {
+    protected void elegirObjetivo(Jugador objetivo) {
     }
 }

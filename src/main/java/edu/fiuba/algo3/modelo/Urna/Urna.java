@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.Urna;
 
-import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 import java.util.ArrayList;
 import java.util.List;

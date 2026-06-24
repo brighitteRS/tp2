@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.Rol;
 import edu.fiuba.algo3.modelo.Roles.*;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

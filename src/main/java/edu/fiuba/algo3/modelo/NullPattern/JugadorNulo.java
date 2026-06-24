@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.NullPattern;
 
-import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 
 public class JugadorNulo extends Jugador {

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.FaseNocturna;
 
-import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.NullPattern.*;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 
@@ -48,7 +48,6 @@ public class Mafia {
     private Jugador resolverEmpate(List<Jugador> ganadores) {
 
         for (Jugador jugador : jugadores) {
-
             Jugador voto = jugador.obtenerVotoPrioritario();
 
             if (ganadores.contains(voto)) {

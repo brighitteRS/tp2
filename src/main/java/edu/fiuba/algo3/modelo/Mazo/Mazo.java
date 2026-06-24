@@ -1,52 +1,58 @@
 package edu.fiuba.algo3.modelo.Mazo;
 
 import edu.fiuba.algo3.modelo.*;
-
-import java.util.ArrayList;
+import edu.fiuba.algo3.modelo.Jugador.Rol;
 import java.util.List;
 
 public class Mazo {
 
-    private List<Rol> cartas;
-    private Mezclador mezclador;
+    private final List<Rol> cartas;
+    private final Mezclador mezclador;
 
     public Mazo(List<Rol> cartas, Mezclador mezclador) {
         this.cartas = cartas;
         this.mezclador = mezclador;
     }
 
-    public static Mazo crear(int cantidadJugadores, Mezclador mezclador) {
+    public Mazo(int cantJugadores) {
+        this.mezclador = new Aleatorio();
 
-        EstrategiaDeComposicion estrategia = FabricaDeComposicion.crear(cantidadJugadores);
-        List<Rol> cartas = estrategia.crearRoles(cantidadJugadores);
-        return new Mazo(cartas, mezclador);
+        EstrategiaDeComposicion estrategia =
+                FabricaDeComposicion.crear(cantJugadores);
+
+        this.cartas = estrategia.crearRoles(cantJugadores);
     }
 
-    public static Mazo crear(int cantidadJugadores) {
-        return Mazo.crear(cantidadJugadores, new Aleatorio());
+    public void mezclar() {
+        mezclador.mezclar(cartas);
     }
 
-    public int contarRolesDe(Class<?> tipo) {
+    public Rol sacarCarta() {
 
-        int contador = 0;
-        for (Rol r : cartas) {
-            if (r.getClass().equals(tipo)) {
-                contador++;
-            }
+        if (cartas.isEmpty()) {
+            throw new IllegalStateException();
         }
-        return contador;
+
+        return cartas.remove(0);
     }
 
     public int totalDeCartas() {
         return cartas.size();
     }
 
-    // en teoria es solo para los test. repartir no deberia crear a los jugadores (preguntar a ignacio antes de tocar)
-    public void repartir(int cantidadJugadores, List<Jugador> jugadores) {
+    public int contarRolesDe(Class<?> tipo) {
 
-        mezclador.mezclar(cartas);
-        for (int i = 0; i < cantidadJugadores; i++) {
-            jugadores.add(new Jugador(cartas.get(i)));
+        int contador = 0;
+
+        for (Rol rol : cartas) {
+            if (rol.getClass().equals(tipo)) {
+                contador++;
+            }
         }
+        return contador;
+    }
+
+    public boolean tieneCartas(){
+        return !cartas.isEmpty();
     }
 }

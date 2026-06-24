@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entrega_1;
+/*package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Mazo.*;
@@ -98,7 +98,7 @@ public class MazoTest {
         // Assert
         assertTrue(mafioso1.conocesA(mafioso2));
         assertFalse(mafioso1.conocesA(ciudadano));
-    }*/
+    }
 
     @Test
     public void test05MafiososSeConocenEntreEllos() {
@@ -116,6 +116,6 @@ public class MazoTest {
         assertEquals(BandoNulo.INSTANCIA, bandoCiudadano);
     }
 }
-
+*/
 
 

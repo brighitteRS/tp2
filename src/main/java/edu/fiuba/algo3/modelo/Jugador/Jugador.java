@@ -50,6 +50,16 @@ public class Jugador {
         rol.actuarDeNoche(resultado);
     }
 
+    public void actuarComoDetective(ResultadoNocturno resultado) {
+        estado.validarPuedeActuar();
+        rol.actuarDetective(resultado);
+    }
+
+    public void actuarComoMedico(ResultadoNocturno resultado) {
+        estado.validarPuedeActuar();
+        rol.actuarMedico(resultado);
+    }
+
     public Bando resultadoInvestigacion() {
         estado.validarPuedeActuar();
         return rol.obtenerResultado();

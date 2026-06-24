@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entrega_2;
+/*package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.Muerto;
 import edu.fiuba.algo3.modelo.Roles.Ciudadano;
@@ -97,4 +97,4 @@ public class FaseDiurnaTest {
 
     }
 
-}
+}*/

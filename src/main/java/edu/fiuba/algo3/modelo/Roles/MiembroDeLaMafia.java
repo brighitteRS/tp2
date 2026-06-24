@@ -35,7 +35,7 @@ public abstract class MiembroDeLaMafia extends Rol {
     }
 
     @Override
-    protected void elegirObjetivo(Jugador objetivo) {
+    public void elegir(Jugador objetivo) {
         objetivo.validarPuedeSerVictimaDeMafia();
         victimaElegida = objetivo;
     }

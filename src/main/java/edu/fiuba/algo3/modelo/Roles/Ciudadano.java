@@ -15,6 +15,6 @@ public class Ciudadano extends Rol {
     }
 
     @Override
-    protected void elegirObjetivo(Jugador objetivo) {
+    public void elegir (Jugador objetivo) {
     }
 }

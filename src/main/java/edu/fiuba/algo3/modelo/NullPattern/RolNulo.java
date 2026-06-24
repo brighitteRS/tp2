@@ -18,6 +18,6 @@ public class RolNulo extends Rol {
     }
 
     @Override
-    protected void elegirObjetivo(Jugador objetivo) {
+    public void elegir(Jugador objetivo) {
     }
 }

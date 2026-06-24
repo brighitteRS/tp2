@@ -23,7 +23,7 @@ public class Partida {
         this.rondaActual = new Ronda(1); //ver esto ya es un dato primitivo creo
     }
 
-    public void avanzar() {
+    public void ejecutar() {
 
         faseActual.ejecutar(jugadores);
 
@@ -35,6 +35,6 @@ public class Partida {
 
         rondaActual = faseActual.actualizar(rondaActual);
 
-        faseActual = faseActual.siguiente();
+        //faseActual = faseActual.siguiente();
     }
 }

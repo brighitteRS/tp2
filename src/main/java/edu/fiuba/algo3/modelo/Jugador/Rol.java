@@ -27,16 +27,19 @@ public abstract class Rol {
     public void actuarDeNoche(ResultadoNocturno resultado) {
     }
 
-    public void elegir(Jugador objetivo) {
-        elegirObjetivo(objetivo); //probar cuando lo borro
+    public void actuarDetective(ResultadoNocturno resultado) {
     }
+
+    public void actuarMedico(ResultadoNocturno resultado) {
+    }
+
+    public abstract void elegir(Jugador objetivo);
 
     public void validarPuedeSerVictimaDeMafia() {
     }
 
     public void votar(Jugador self, Urna urna) {}
 
-    protected abstract void elegirObjetivo(Jugador objetivo);
 
     protected Bando obtenerResultado() {
         return BandoNulo.INSTANCIA;

@@ -10,10 +10,10 @@ public class Muerto implements EstadoJugador {
     //mejorar el tema de las excepciones como en el tp1
     @Override
     public void validarPuedeActuar() {
-        throw new IllegalStateException("Jugador muerto no puede actuar");
+        throw new IllegalStateException();
     }
 
     public void validarPuedeSerObjetivo() {
-        throw new IllegalStateException("No puede ser objetivo");
+        throw new IllegalArgumentException();
     }
 }

@@ -10,7 +10,7 @@ public class Sheriff extends Rol {
     public Sheriff() {super(BandoCiudadano.INSTANCIA);}
 
     @Override
-    protected void elegirObjetivo(Jugador objetivo) {
+    public void elegir(Jugador objetivo) {
     }
 
     @Override

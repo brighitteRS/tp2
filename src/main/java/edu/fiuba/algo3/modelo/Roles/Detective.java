@@ -22,7 +22,7 @@ public class Detective extends Rol {
     }
 
     @Override
-    protected void elegirObjetivo(Jugador objetivo) {
+    public void elegir(Jugador objetivo) {
 
         if (objetivo == ultimoInvestigado) {
             throw new IllegalArgumentException();
@@ -33,7 +33,7 @@ public class Detective extends Rol {
     }
 
     @Override
-    public void actuarDeNoche(ResultadoNocturno resultado) {
+    public void actuarDetective(ResultadoNocturno resultado) {
         this.resultado = investigado.revelarBandoAInvestigacion();
         investigado = JugadorNulo.INSTANCIA;
     }

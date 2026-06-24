@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 import java.util.ArrayList;
@@ -54,5 +55,8 @@ public class Jugadores {
         for (Jugador jugador : jugadores) {
             jugador.revelarCarta();
         }
+    }
+    public List<Jugador> todosLosJugadores() {
+        return new ArrayList<>(jugadores);
     }
 }

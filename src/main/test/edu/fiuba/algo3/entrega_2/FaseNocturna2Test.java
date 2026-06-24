@@ -22,7 +22,7 @@ public class FaseNocturna2Test {
         ResultadoNocturno resultado = new ResultadoNocturno();
 
         detective.elegir(mafioso);
-        detective.actuarDeNoche(resultado);
+        detective.actuarComoDetective(resultado);
 
         assertEquals(BandoMafia.INSTANCIA,detective.resultadoInvestigacion());
     }
@@ -35,7 +35,7 @@ public class FaseNocturna2Test {
         ResultadoNocturno resultado = new ResultadoNocturno();
 
         detective.elegir(ciudadano);
-        detective.actuarDeNoche(resultado);
+        detective.actuarComoDetective(resultado);
         assertEquals(BandoCiudadano.INSTANCIA,detective.resultadoInvestigacion());
     }
 
@@ -47,7 +47,7 @@ public class FaseNocturna2Test {
         ResultadoNocturno resultado = new ResultadoNocturno();
 
         detective.elegir(padrino);
-        detective.actuarDeNoche(resultado);
+        detective.actuarComoDetective(resultado);
         assertEquals(BandoCiudadano.INSTANCIA,detective.resultadoInvestigacion());
     }
 

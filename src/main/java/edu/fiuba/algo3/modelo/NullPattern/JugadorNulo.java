@@ -29,4 +29,9 @@ public class JugadorNulo extends Jugador {
     public Jugador obtenerVotoPrioritario() {
         return this;
     }
+
+    @Override
+    public void validarPuedeSerObjetivo() {
+        throw new IllegalArgumentException();
+    }
 }

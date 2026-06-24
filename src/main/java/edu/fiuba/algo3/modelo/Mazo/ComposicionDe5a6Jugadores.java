@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.Mazo;
 
-import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Jugador.Rol;
 import edu.fiuba.algo3.modelo.Roles.Ciudadano;
 import edu.fiuba.algo3.modelo.Roles.Detective;
 import edu.fiuba.algo3.modelo.Roles.Mafioso;

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.NullPattern;
 
-import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 
 public class JugadorNulo extends Jugador {
@@ -16,17 +16,22 @@ public class JugadorNulo extends Jugador {
     public boolean estaVivo() {
         return false;
     }
-    @Override
-    public void cambiarEstado(EstadoJugador nuevoEstado) {
-    }
 
     @Override
     public void elegir(Jugador objetivo) {
     }
 
     @Override
-    public boolean estaNulo() {
-        return true;
+    public void guardarVotoNocturno(Urna urna) {
     }
-    public void registrarVotoEn(Urna urna, Jugador votado) {}
+
+    @Override
+    public Jugador obtenerVotoPrioritario() {
+        return this;
+    }
+
+    @Override
+    public void validarPuedeSerObjetivo() {
+        throw new IllegalArgumentException();
+    }
 }

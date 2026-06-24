@@ -1,9 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.FaseNocturna.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Roles.*;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.*;
 
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,10 +18,10 @@ public class FaseNocturnaTest {
         ResultadoNocturno resultado = new ResultadoNocturno();
 
         Jugador mafioso1 = new Jugador(new Mafioso());
-        Mafia mafia = new Mafia();
+        Mafia mafia = new Mafia(List.of(mafioso1));
         mafioso1.elegir(victima);
 
-        mafia.actuarDeNoche(List.of(mafioso1),resultado);
+        mafia.actuarDeNoche(resultado);
 
         assertEquals(victima, mafia.obtenerResolucion());
     }
@@ -29,7 +30,7 @@ public class FaseNocturnaTest {
     public void laMafiaRechazaVictimasInvalidas() {
 
         Jugador jugador = new Jugador(new Ciudadano());
-        jugador.cambiarEstado(new Muerto());
+        jugador.eliminar();
 
         Jugador mafioso = new Jugador(new Mafioso());
 
@@ -54,9 +55,11 @@ public class FaseNocturnaTest {
 
         jugadorMedico.elegir(victima);
 
-        FaseNocturna fase = new FaseNocturna(List.of(jugadorMafioso,jugadorMedico));
+        Jugadores jugadores = new Jugadores(List.of(jugadorMafioso, jugadorMedico));
 
-        fase.ejecutar();
+        FaseNocturna fase = new FaseNocturna();
+
+        fase.ejecutar(jugadores);
 
         assertTrue(victima.estaVivo());
     }
@@ -73,11 +76,78 @@ public class FaseNocturnaTest {
         Jugador jugadorMedico = new Jugador(new Medico());
         jugadorMedico.elegir(protegido);
 
-        FaseNocturna fase = new FaseNocturna(List.of(mafioso,jugadorMedico));
+        Jugadores jugadores = new Jugadores(List.of(mafioso, jugadorMedico));
 
-        fase.ejecutar();
+        FaseNocturna fase = new FaseNocturna();
+
+        fase.ejecutar(jugadores);
 
         assertFalse(victima.estaVivo());
         assertTrue(protegido.estaVivo());
+    }
+
+    @Test
+    public void elPadrinoDesempataLaVotacionDeLaMafia() {
+
+        Jugador jugador1 = new Jugador(new Ciudadano());
+        Jugador jugador2 = new Jugador(new Ciudadano());
+
+        Jugador mafioso = new Jugador(new Mafioso());
+        Jugador padrino = new Jugador(new Padrino());
+
+        mafioso.elegir(jugador1);
+        padrino.elegir(jugador2);
+
+        ResultadoNocturno resultado = new ResultadoNocturno();
+        Mafia mafia = new Mafia(List.of(mafioso, padrino));
+
+        mafia.actuarDeNoche(resultado);
+
+        assertEquals(jugador2, mafia.obtenerResolucion());
+    }
+
+    @Test
+    public void siTodosLosMafiososVotanDistintoDecideElPadrino() {
+
+        Jugador jugador1 = new Jugador(new Ciudadano());
+        Jugador jugador2 = new Jugador(new Ciudadano());
+        Jugador maria = new Jugador(new Ciudadano());
+
+        Jugador mafioso1 = new Jugador(new Mafioso());
+        Jugador mafioso2 = new Jugador(new Mafioso());
+        Jugador padrino = new Jugador(new Padrino());
+
+        mafioso1.elegir(jugador1);
+        mafioso2.elegir(jugador2);
+        padrino.elegir(maria);
+
+        ResultadoNocturno resultado = new ResultadoNocturno();
+        Mafia mafia = new Mafia(List.of(mafioso1, mafioso2, padrino));
+
+        mafia.actuarDeNoche(resultado);
+
+        assertEquals(maria, mafia.obtenerResolucion());
+    }
+
+    @Test
+    public void elVotoDelPadrinoNoModificaUnaVotacionConMayoria() {
+
+        Jugador jugador1 = new Jugador(new Ciudadano());
+        Jugador jugador2 = new Jugador(new Ciudadano());
+
+        Jugador mafioso1 = new Jugador(new Mafioso());
+        Jugador mafioso2 = new Jugador(new Mafioso());
+        Jugador padrino = new Jugador(new Padrino());
+
+        mafioso1.elegir(jugador1);
+        mafioso2.elegir(jugador1);
+        padrino.elegir(jugador2);
+
+        ResultadoNocturno resultado = new ResultadoNocturno();
+        Mafia mafia = new Mafia(List.of(mafioso1, mafioso2, padrino));
+
+        mafia.actuarDeNoche(resultado);
+
+        assertEquals(jugador1, mafia.obtenerResolucion());
     }
 }

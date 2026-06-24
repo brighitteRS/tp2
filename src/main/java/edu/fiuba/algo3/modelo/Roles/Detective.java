@@ -2,8 +2,9 @@ package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
-import edu.fiuba.algo3.modelo.NullPattern.BandoNulo;
-import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.Rol;
+import edu.fiuba.algo3.modelo.NullPattern.*;
 
 public class Detective extends Rol {
 
@@ -21,7 +22,7 @@ public class Detective extends Rol {
     }
 
     @Override
-    protected void ejecutoEleccion(Jugador objetivo) {
+    public void elegir(Jugador objetivo) {
 
         if (objetivo == ultimoInvestigado) {
             throw new IllegalArgumentException();
@@ -31,10 +32,9 @@ public class Detective extends Rol {
         investigado = objetivo;
     }
 
-    //solucionar el tema del null(aplicar tdd para solucionar el bug)
     @Override
-    public void actuarDeNoche(ResultadoNocturno resultado) {
-        this.resultado = investigado.consultarBando(investigado);
+    public void actuarDetective(ResultadoNocturno resultado) {
+        this.resultado = investigado.revelarBandoAInvestigacion();
         investigado = JugadorNulo.INSTANCIA;
     }
 

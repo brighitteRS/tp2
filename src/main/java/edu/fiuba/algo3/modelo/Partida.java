@@ -1,25 +1,40 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import edu.fiuba.algo3.modelo.CondicionesVictoria.*;
+import edu.fiuba.algo3.modelo.NullPattern.BandoNulo;
+
 
 public class Partida {
-    private List<Jugador> jugadores;
 
-    public Partida(List<Jugador> jugadores) {
+    private final Jugadores jugadores;
+    private final EstrategiaVictoria estrategia;
+
+    private Fase faseActual;
+    private Ronda rondaActual;
+
+    public Partida(
+            Jugadores jugadores,
+            EstrategiaVictoria estrategia,
+            Fase faseInicial) {
+
         this.jugadores = jugadores;
-        reconocerMafiosos();
+        this.estrategia = estrategia;
+        this.faseActual = faseInicial;
+        this.rondaActual = new Ronda(1); //ver esto ya es un dato primitivo creo
     }
 
-    private void reconocerMafiosos() {
+    public void ejecutar() {
 
-        List<Jugador> mafiosos = jugadores.stream()
-                .filter(j -> j.consultarBando(j) == BandoMafia.INSTANCIA)
-                .collect(Collectors.toList());
+        faseActual.ejecutar(jugadores);
 
-        for (Jugador mafioso : mafiosos) {
-            mafioso.reconocerComplices(mafiosos);
+        Bando ganador = estrategia.resolver(jugadores);
+
+        if (!ganador.equals(BandoNulo.INSTANCIA)) {
+            jugadores.revelarTodasLasCartas();
         }
+
+        rondaActual = faseActual.actualizar(rondaActual);
+
+        //faseActual = faseActual.siguiente();
     }
 }
-

@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.Rol;
 import edu.fiuba.algo3.modelo.Roles.*;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +17,7 @@ public class JugadorTest {
         Jugador jugador2 = new Jugador(new Ciudadano());
 
         // Act
-        victima.cambiarEstado(new Muerto());
+        victima.eliminar();
 
         // Assert
         assertEquals(rolCiudadano, victima.consultarRol(jugador2));
@@ -29,7 +30,7 @@ public class JugadorTest {
         // Arrange
         Jugador mafioso = new Jugador(new Mafioso());
         Jugador victima = new Jugador(new Ciudadano());
-        mafioso.cambiarEstado(new Muerto());
+        mafioso.eliminar();
 
         // Assert
         assertThrows(IllegalStateException.class, () -> {

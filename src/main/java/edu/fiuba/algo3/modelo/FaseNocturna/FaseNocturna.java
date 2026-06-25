@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.FaseNocturna;
 
+import edu.fiuba.algo3.modelo.FaseDiurna.FaseDiurna;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.*;
@@ -28,10 +29,10 @@ public class FaseNocturna implements Fase {
         resultado.resolver();
     }
 
-    /*@Override
+    @Override
     public Fase siguiente() {
         return new FaseDiurna();
-    }*/
+    }
 
     @Override
     public Ronda actualizar(Ronda ronda) {

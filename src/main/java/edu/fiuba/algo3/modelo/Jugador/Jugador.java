@@ -31,7 +31,7 @@ public class Jugador {
     }
 
     public void revelarCarta() {
-        carta = new CartaRevelada();
+        this.carta = new CartaRevelada();
     }
 
     public Bando consultarBando(Jugador solicitante) {
@@ -84,7 +84,7 @@ public class Jugador {
 
     public void guardarVotoNocturno(Urna urna) {
         estado.validarPuedeActuar();
-        rol.votar( this, urna);
+        rol.votar(this, urna);
     }
 
     public Jugador obtenerVotoPrioritario() {
@@ -102,15 +102,24 @@ public class Jugador {
         rol.recibirComplices(this, mafiosos);
     }
 
-    public void validarPuedeSerVictimaDeMafia() {
-        rol.validarPuedeSerVictimaDeMafia();
+    public boolean conoceA(Jugador otro) {
+        estado.validarPuedeActuar();
+        return rol.conoceA(this, otro);
     }
 
     public boolean perteneceA(Bando bando) {
         return rol.revelarBando().equals(bando);
     }
 
+    public void validarPuedeSerVictimaDeMafia() {
+        rol.validarPuedeSerVictimaDeMafia();
+    }
+
     public void validarPuedeSerObjetivo() {
         estado.validarPuedeSerObjetivo();
+    }
+
+    public void validarSiPuedeActuar() {
+        estado.validarPuedeActuar();
     }
 }

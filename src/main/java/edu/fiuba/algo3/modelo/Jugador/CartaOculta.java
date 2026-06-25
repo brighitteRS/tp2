@@ -17,7 +17,6 @@ public class CartaOculta implements EstadoCarta {
 
     @Override
     public Bando consultarBando(Rol rol, Jugador propietario, Jugador solicitante) {
-
         return rol.revelarBandoA(solicitante);
     }
 }

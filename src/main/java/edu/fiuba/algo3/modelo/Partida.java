@@ -20,7 +20,7 @@ public class Partida {
         this.jugadores = jugadores;
         this.estrategia = estrategia;
         this.faseActual = faseInicial;
-        this.rondaActual = new Ronda(1); //ver esto ya es un dato primitivo creo
+        this.rondaActual = new Ronda(1); //ver dps si no es dato primitivo
     }
 
     public void ejecutar() {
@@ -35,6 +35,6 @@ public class Partida {
 
         rondaActual = faseActual.actualizar(rondaActual);
 
-        //faseActual = faseActual.siguiente();
+        faseActual = faseActual.siguiente();
     }
 }

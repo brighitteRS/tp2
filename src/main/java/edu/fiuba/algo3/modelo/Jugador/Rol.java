@@ -54,4 +54,8 @@ public abstract class Rol {
 
     public void recibirComplices(Jugador self, List<Jugador> mafiosos) {
     }
+
+    public boolean conoceA(Jugador self, Jugador otro) {
+        return false;
+    }
 }

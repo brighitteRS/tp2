@@ -1,13 +1,13 @@
 package edu.fiuba.algo3.modelo.FaseDiurna;
 
+
 import edu.fiuba.algo3.modelo.Fase;
+import edu.fiuba.algo3.modelo.FaseNocturna.FaseNocturna;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 import edu.fiuba.algo3.modelo.Ronda;
-import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
-import edu.fiuba.algo3.modelo.Urna.Urna;
-import edu.fiuba.algo3.modelo.Urna.Voto;
+import edu.fiuba.algo3.modelo.Urna.*;
 
 import java.util.List;
 
@@ -22,32 +22,20 @@ public class FaseDiurna implements Fase {
         this.nominaciones = new SistemaNominaciones();
     }
 
-    public FaseDiurna(SistemaNominaciones nominaciones) {
-        this.urna = new Urna();
-        this.nominaciones = nominaciones;
-    }
-
-    public FaseDiurna(Urna urna, SistemaNominaciones nominaciones) {
-        this.urna = urna;
-        this.nominaciones = nominaciones;
-    }
-
     public void iniciarDebate(int tiempo) {
         // Aca se deberia mostrar el tiempo en la interfaz grafica y que se puedan comunicar los vivos
     }
 
     public void nominar( Jugador jugadorANominar ) {
-        if ( !jugadorANominar.estaVivo() ) {
-            throw new IllegalArgumentException("No se puuede nominar a un jugador muerto");
-        }
+        jugadorANominar.validarPuedeSerObjetivo();
         nominaciones.agregarCandidato(jugadorANominar);
     }
 
     public void votar(Jugador votador, Jugador votado) {
-        if ( !votador.estaVivo() ){
-            throw new IllegalArgumentException("Un jugador muerto no puede votar");
-        } else if ( !nominaciones.esCandidato(votado) ) {
-            throw new IllegalArgumentException("No se pueden votar jugadores que no son candidatos durante la fase diurna");
+        votador.validarSiPuedeActuar();
+
+        if ( !nominaciones.esCandidato(votado) ) {
+            throw new IllegalArgumentException("No se pueden votar jugadores que no son candidatos");
         }
         urna.registrarVoto( votador, votado );
     }
@@ -96,7 +84,12 @@ public class FaseDiurna implements Fase {
     }
 
     @Override
-    public Ronda actualizar(Ronda ronda){
+    public Fase siguiente() {
+        return new FaseNocturna();
+    }
+
+    @Override
+    public Ronda actualizar(Ronda ronda) {
         return ronda.siguiente();
     }
 }

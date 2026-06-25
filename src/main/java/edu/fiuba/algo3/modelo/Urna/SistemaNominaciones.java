@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Urna;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 import java.util.ArrayList;
@@ -13,15 +14,9 @@ public class SistemaNominaciones {
         this.candidatos = new ArrayList<>();
     }
 
-    public SistemaNominaciones(List<Jugador> candidatos) {
-        this.candidatos = candidatos;
-    }
-
     public void agregarCandidato( Jugador nuevoCandidato ) {
+        nuevoCandidato.validarSiPuedeActuar();
 
-        if (!nuevoCandidato.estaVivo()){
-            throw new IllegalArgumentException("El jugador a nominar debe estar vivo");
-        }
         if ( !this.esCandidato(nuevoCandidato)) {
             candidatos.add(nuevoCandidato);
         }
@@ -34,5 +29,4 @@ public class SistemaNominaciones {
     public boolean esCandidato( Jugador jugador ){
         return candidatos.contains(jugador);
     }
-
 }

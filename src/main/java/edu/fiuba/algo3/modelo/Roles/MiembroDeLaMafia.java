@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo.Roles;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Jugador.Rol;
+import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.NullPattern.*;
 import edu.fiuba.algo3.modelo.RegistroMafia;
 import edu.fiuba.algo3.modelo.Urna.Urna;
@@ -20,24 +19,28 @@ public abstract class MiembroDeLaMafia extends Rol {
         super(BandoMafia.INSTANCIA);
     }
 
+    @Override
+    public Bando revelarBandoA(Jugador solicitante) {
+        return revelarBando();
+    }
+
     protected boolean esComplice(Jugador jugador) {
         return complices.contains(jugador);
     }
 
     @Override
-    public Bando revelarBandoA(Jugador solicitante) {
-
-        if (esComplice(solicitante)) {
-            return revelarBando();
-        }
-
-        return BandoNulo.INSTANCIA;
+    public boolean conoceA(Jugador self, Jugador otro) {
+        return esComplice(otro);
     }
 
     @Override
     public void elegir(Jugador objetivo) {
         objetivo.validarPuedeSerVictimaDeMafia();
         victimaElegida = objetivo;
+    }
+
+    protected Jugador victimaElegida() {
+        return victimaElegida;
     }
 
     @Override
@@ -48,10 +51,6 @@ public abstract class MiembroDeLaMafia extends Rol {
     @Override
     public void validarPuedeSerVictimaDeMafia() {
         throw new IllegalArgumentException();
-    }
-
-    protected Jugador victimaElegida() {
-        return victimaElegida;
     }
 
     @Override

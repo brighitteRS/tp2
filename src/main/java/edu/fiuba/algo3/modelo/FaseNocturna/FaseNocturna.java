@@ -10,7 +10,7 @@ import java.util.List;
 public class FaseNocturna implements Fase {
 
     @Override
-    public void ejecutar(Jugadores jugadores) {
+    public void ejecutar(Jugadores jugadores,Ronda ronda) {
 
         ResultadoNocturno resultado = new ResultadoNocturno();
         List<Jugador> listaJugadores = jugadores.todosLosJugadores();
@@ -20,13 +20,11 @@ public class FaseNocturna implements Fase {
 
         for (Jugador jugador : listaJugadores) {
             jugador.actuarComoDetective(resultado);
-        }
-
-        for (Jugador jugador : listaJugadores) {
             jugador.actuarComoMedico(resultado);
         }
 
         resultado.resolver();
+        ronda.registrarResultadoNocturno(resultado);
     }
 
     @Override

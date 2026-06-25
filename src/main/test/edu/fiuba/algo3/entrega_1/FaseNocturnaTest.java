@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.FaseNocturna.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Roles.*;
+import edu.fiuba.algo3.modelo.Ronda;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class FaseNocturnaTest {
 
         FaseNocturna fase = new FaseNocturna();
 
-        fase.ejecutar(jugadores);
+        fase.ejecutar(jugadores,new Ronda(1));
 
         assertTrue(victima.estaVivo());
     }
@@ -80,7 +81,7 @@ public class FaseNocturnaTest {
 
         FaseNocturna fase = new FaseNocturna();
 
-        fase.ejecutar(jugadores);
+        fase.ejecutar(jugadores, new Ronda(1));
 
         assertFalse(victima.estaVivo());
         assertTrue(protegido.estaVivo());

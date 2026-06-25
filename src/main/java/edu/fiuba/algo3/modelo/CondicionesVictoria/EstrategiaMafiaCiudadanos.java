@@ -17,9 +17,9 @@ public class EstrategiaMafiaCiudadanos implements EstrategiaVictoria {
     @Override
     public Bando resolver(Jugadores jugadores) {
 
-        for (CondicionVictoria c : condiciones) {
+        for (CondicionVictoria condicion : condiciones) {
 
-            Bando resultado = c.evaluar(jugadores);
+            Bando resultado = condicion.evaluar(jugadores);
 
             if (!resultado.equals(BandoNulo.INSTANCIA)) {
                 return resultado;

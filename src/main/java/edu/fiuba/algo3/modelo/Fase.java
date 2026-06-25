@@ -4,7 +4,7 @@ public interface Fase {
 
     void ejecutar(Jugadores jugadores);
 
-    //Fase siguiente();
+    Fase siguiente();
 
     Ronda actualizar(Ronda ronda);
 }

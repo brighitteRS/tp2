@@ -28,10 +28,10 @@ public class FaseNocturna implements Fase {
         resultado.resolver();
     }
 
-    /*@Override
+    @Override
     public Fase siguiente() {
         return new FaseDiurna();
-    }*/
+    }
 
     @Override
     public Ronda actualizar(Ronda ronda) {

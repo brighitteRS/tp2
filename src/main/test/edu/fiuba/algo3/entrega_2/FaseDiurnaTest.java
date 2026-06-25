@@ -1,19 +1,14 @@
-/*package edu.fiuba.algo3.entrega_2;
+package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.Muerto;
+import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 import edu.fiuba.algo3.modelo.Roles.Ciudadano;
-import edu.fiuba.algo3.modelo.FaseDiurna;
-import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.Roles.Mafioso;
-import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
-import edu.fiuba.algo3.modelo.Urna.Urna;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class FaseDiurnaTest {
 
@@ -21,13 +16,10 @@ public class FaseDiurnaTest {
     public void test01LosCandidatosSonJugadoresVivos() {
         // Arrange
         Jugador jugador1 = new Jugador(new Mafioso());
-        jugador1.cambiarEstado(new Muerto());
-        SistemaNominaciones nominaciones = new SistemaNominaciones();
-        FaseDiurna fase = new FaseDiurna(nominaciones);
+        jugador1.eliminar();
+        FaseDiurna fase = new FaseDiurna();
 
-        // Act
-
-        // Assert
+        // Act y Assert
         assertThrows(IllegalArgumentException.class, ()  -> {
             fase.nominar(jugador1);
         });
@@ -38,16 +30,13 @@ public class FaseDiurnaTest {
         // Arrange
         Jugador jugador1 = new Jugador(new Ciudadano());
         Jugador jugador2 = new Jugador(new Ciudadano());
-        SistemaNominaciones nominaciones = new SistemaNominaciones();
-        Urna urna = new Urna();
 
-        FaseDiurna fase = new FaseDiurna(urna, nominaciones);
+        FaseDiurna fase = new FaseDiurna();
 
         // Act y Assert
         assertThrows(IllegalArgumentException.class, () -> {
             fase.votar(jugador1, jugador2);
         });
-
     }
 
     @Test
@@ -58,12 +47,12 @@ public class FaseDiurnaTest {
         Jugador jugador2 = new Jugador(new Ciudadano());
         Jugador jugador3 = new Jugador(new Ciudadano());
 
-        SistemaNominaciones nominaciones = new SistemaNominaciones(Arrays.asList(jugadorAeliminar, jugador2));
-        Urna urna = new Urna();
-
-        FaseDiurna fase = new FaseDiurna(urna, nominaciones);
+        FaseDiurna fase = new FaseDiurna();
 
         // Act
+        fase.nominar(jugadorAeliminar);
+        fase.nominar(jugador2);
+
         fase.votar(jugadorAeliminar, jugador2);
         fase.votar(jugador2, jugadorAeliminar);
         fase.votar(jugador3, jugadorAeliminar);
@@ -72,8 +61,6 @@ public class FaseDiurnaTest {
 
         // Assert
         assertEquals(jugadorAeliminar, eliminado);
-
-
     }
 
     @Test
@@ -83,18 +70,17 @@ public class FaseDiurnaTest {
         Jugador jugador1 = new Jugador(new Mafioso());
         Jugador jugador2 = new Jugador(new Ciudadano());
 
-        SistemaNominaciones nominaciones = new SistemaNominaciones(Arrays.asList(jugador1, jugador2));
-        Urna urna = new Urna();
-        FaseDiurna fase = new FaseDiurna(urna, nominaciones);
+        FaseDiurna fase = new FaseDiurna();
 
         // Act
+        fase.nominar(jugador1);
+        fase.nominar(jugador2);
+
         fase.votar(jugador1, jugador2);
         fase.votar(jugador2, jugador1);
         Jugador eliminado = fase.eliminarAlMasVotado();
 
         // Assert
-        assertNull(eliminado);
-
+        assertEquals(JugadorNulo.INSTANCIA,eliminado);
     }
-
-}*/
+}

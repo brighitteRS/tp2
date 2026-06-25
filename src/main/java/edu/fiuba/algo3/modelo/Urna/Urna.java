@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Urna;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 import java.util.ArrayList;
@@ -56,4 +57,5 @@ public class Urna {
         if ( !this.fueVotado(votado) ){
             votados.add(votado);
         }
-}}
+    }
+}

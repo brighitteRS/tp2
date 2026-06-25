@@ -1,6 +1,8 @@
-/*package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.FaseNocturna.FaseNocturna;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 
@@ -16,18 +18,8 @@ public class FaseDiurna implements Fase{
         this.nominaciones = new SistemaNominaciones();
     }
 
-    public FaseDiurna(SistemaNominaciones nominaciones) {
-        this.urna = new Urna();
-        this.nominaciones = nominaciones;
-    }
-
-    public FaseDiurna(Urna urna, SistemaNominaciones nominaciones) {
-        this.urna = urna;
-        this.nominaciones = nominaciones;
-    }
-
-    public FaseDiurna(Urna urna) {
-        this.urna = urna;
+    @Override
+    public void ejecutar(Jugadores jugadores) {
     }
 
     public void iniciarDebate(int tiempo) {
@@ -35,18 +27,17 @@ public class FaseDiurna implements Fase{
     }
 
     public void nominar( Jugador jugadorANominar ) {
-        if ( !jugadorANominar.estaVivo() ) {
-            throw new IllegalArgumentException("No se puuede nominar a un jugador muerto");
-        }
+        jugadorANominar.validarPuedeSerObjetivo();
         nominaciones.agregarCandidato(jugadorANominar);
     }
 
     public void votar(Jugador votador, Jugador votado) {
-        if ( !votador.estaVivo() ){
-            throw new IllegalArgumentException("Un jugador muerto no puede votar");
-        } else if ( !nominaciones.esCandidato(votado) ) {
-            throw new IllegalArgumentException("No se pueden votar jugadores que no son candidatos durante la fase diurna");
+        votador.validarSiPuedeActuar();
+
+        if ( !nominaciones.esCandidato(votado) ) {
+            throw new IllegalArgumentException("No se pueden votar jugadores que no son candidatos");
         }
+
         urna.registrarVoto( votador, votado );
     }
 
@@ -54,7 +45,7 @@ public class FaseDiurna implements Fase{
         List<Jugador> ganadores = urna.getGanadores();
 
         if ( ganadores.size() > 1  ) {
-            return null;
+            return JugadorNulo.INSTANCIA;
         }
 
         Jugador eliminado = ganadores.get(0);
@@ -66,9 +57,13 @@ public class FaseDiurna implements Fase{
         return nominaciones.obtenerCandidatos();
     }
 
-    /*@Override
+    @Override
+    public Fase siguiente() {
+        return new FaseNocturna();
+    }
+
+    @Override
     public Ronda actualizar(Ronda ronda) {
         return ronda.siguiente();
     }
-
-}*/
+}

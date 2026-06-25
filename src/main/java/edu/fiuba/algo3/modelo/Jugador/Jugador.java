@@ -100,4 +100,8 @@ public class Jugador {
     public void validarPuedeSerObjetivo() {
         estado.validarPuedeSerObjetivo();
     }
+
+    public void validarSiPuedeActuar() {
+        estado.validarPuedeSerObjetivo();
+    }
 }

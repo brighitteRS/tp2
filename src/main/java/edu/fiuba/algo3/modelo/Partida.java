@@ -35,6 +35,6 @@ public class Partida {
 
         rondaActual = faseActual.actualizar(rondaActual);
 
-        //faseActual = faseActual.siguiente();
+        faseActual = faseActual.siguiente();
     }
 }

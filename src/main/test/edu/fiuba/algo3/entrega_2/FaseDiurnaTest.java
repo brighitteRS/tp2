@@ -1,9 +1,10 @@
-/*package edu.fiuba.algo3.entrega_2;
+package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.Muerto;
+import edu.fiuba.algo3.modelo.Jugador.Muerto;
+import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 import edu.fiuba.algo3.modelo.Roles.Ciudadano;
 import edu.fiuba.algo3.modelo.FaseDiurna;
-import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Roles.Mafioso;
 import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
 import edu.fiuba.algo3.modelo.Urna.Urna;
@@ -21,7 +22,7 @@ public class FaseDiurnaTest {
     public void test01LosCandidatosSonJugadoresVivos() {
         // Arrange
         Jugador jugador1 = new Jugador(new Mafioso());
-        jugador1.cambiarEstado(new Muerto());
+        jugador1.eliminar();
         SistemaNominaciones nominaciones = new SistemaNominaciones();
         FaseDiurna fase = new FaseDiurna(nominaciones);
 
@@ -93,8 +94,8 @@ public class FaseDiurnaTest {
         Jugador eliminado = fase.eliminarAlMasVotado();
 
         // Assert
-        assertNull(eliminado);
+        assertEquals(JugadorNulo.INSTANCIA, eliminado);
 
     }
 
-}*/
+}

@@ -1,12 +1,13 @@
-/*package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 
 import java.util.List;
 
-public class FaseDiurna implements Fase{
+public class FaseDiurna{
 
     private Urna urna;
     private SistemaNominaciones nominaciones;
@@ -54,7 +55,7 @@ public class FaseDiurna implements Fase{
         List<Jugador> ganadores = urna.getGanadores();
 
         if ( ganadores.size() > 1  ) {
-            return null;
+            return JugadorNulo.INSTANCIA;
         }
 
         Jugador eliminado = ganadores.get(0);
@@ -66,9 +67,22 @@ public class FaseDiurna implements Fase{
         return nominaciones.obtenerCandidatos();
     }
 
+
+
+//    @Override
+//    public void ejecutar(Jugadores jugadores){
+//        iniciarDebate(120);
+//
+//        List<Jugador> listaJugadores = jugadores.vivos();
+//
+//        for ( j : listaJugadores) {
+//
+//            urna.registrarVoto( j, );
+//        }
+//    }
+};
+
     /*@Override
     public Ronda actualizar(Ronda ronda) {
         return ronda.siguiente();
-    }
-
-}*/
+    }*/

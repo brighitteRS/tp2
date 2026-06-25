@@ -34,6 +34,7 @@ public class Detective extends Rol {
 
     @Override
     public void actuarDetective(ResultadoNocturno resultado) {
+        resultado.registrarInvestigado(investigado);
         this.resultado = investigado.revelarBandoAInvestigacion();
         investigado = JugadorNulo.INSTANCIA;
     }

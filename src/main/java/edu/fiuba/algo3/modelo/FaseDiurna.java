@@ -18,7 +18,7 @@ public class FaseDiurna implements Fase{
     }
 
     @Override
-    public void ejecutar(Jugadores jugadores) {
+    public void ejecutar(Jugadores jugadores, Ronda ronda) {
     }
 
     public void iniciarDebate(int tiempo) {

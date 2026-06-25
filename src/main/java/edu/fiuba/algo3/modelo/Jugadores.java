@@ -21,6 +21,12 @@ public class Jugadores {
                 .collect(Collectors.toList());
     }
 
+    public List<Jugador> muertos() {
+        return jugadores.stream()
+                .filter(j -> !j.estaVivo())
+                .collect(Collectors.toList());
+    }
+
     public long mafiososVivos() {
         return vivos().stream()
                 .filter(j -> j.perteneceA(BandoMafia.INSTANCIA))
@@ -58,5 +64,11 @@ public class Jugadores {
     }
     public List<Jugador> todosLosJugadores() {
         return new ArrayList<>(jugadores);
+    }
+
+    public List<Jugador> mafiosos() {
+        return vivos().stream()
+                .filter(j -> j.perteneceA(BandoMafia.INSTANCIA))
+                .collect(Collectors.toList());
     }
 }

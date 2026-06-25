@@ -59,4 +59,10 @@ public class Jugadores {
     public List<Jugador> todosLosJugadores() {
         return new ArrayList<>(jugadores);
     }
+
+    public List<Jugador> mafiosos() {
+        return vivos().stream()
+                .filter(j -> j.perteneceA(BandoMafia.INSTANCIA))
+                .collect(Collectors.toList());
+    }
 }

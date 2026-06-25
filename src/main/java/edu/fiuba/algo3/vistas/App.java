@@ -14,12 +14,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
-
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new StackPane(label), 640, 480);
-        stage.setScene(scene);
+        SetupView setup = new SetupView(stage);
+        stage.setScene(setup.crearEscena());
+        stage.setTitle("TP2-MAFIA v1.0");
         stage.show();
     }
 

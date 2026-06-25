@@ -2,9 +2,12 @@ package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
+import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 import edu.fiuba.algo3.modelo.Urna.Urna;
 
 import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Jugador {
 
@@ -43,6 +46,16 @@ public class Jugador {
         estado.validarPuedeActuar();
         objetivo.validarPuedeSerObjetivo();
         rol.elegir(objetivo);
+    }
+
+    public Jugador seleccionar(List<Jugador> jugadores) {
+        // Metodo que se usa para los tests, cuando tengamos interfaz se elimina
+        if (jugadores.isEmpty()) {
+            return JugadorNulo.INSTANCIA;
+        }
+
+        Random random = new Random();
+        return jugadores.get(random.nextInt(jugadores.size()));
     }
 
     public void actuarDeNoche(ResultadoNocturno resultado) {

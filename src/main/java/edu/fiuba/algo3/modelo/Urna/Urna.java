@@ -38,6 +38,10 @@ public class Urna {
         return ganadores;
     }
 
+    public List<Voto> obtenerVotos() {
+        return votos;
+    }
+
     private int conteo(Jugador votado) {
         int cantidadVotos = 0;
         for (Voto v : votos) {

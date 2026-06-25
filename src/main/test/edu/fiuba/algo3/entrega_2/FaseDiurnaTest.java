@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.Jugador.Muerto;
 import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
 import edu.fiuba.algo3.modelo.Roles.Ciudadano;
-import edu.fiuba.algo3.modelo.FaseDiurna;
+import edu.fiuba.algo3.modelo.FaseDiurna.FaseDiurna;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Roles.Mafioso;
 import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
@@ -12,9 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class FaseDiurnaTest {
 

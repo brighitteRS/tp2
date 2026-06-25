@@ -1,16 +1,21 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.FaseDiurna;
 
+import edu.fiuba.algo3.modelo.Fase;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
+import edu.fiuba.algo3.modelo.Ronda;
 import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
 import edu.fiuba.algo3.modelo.Urna.Urna;
+import edu.fiuba.algo3.modelo.Urna.Voto;
 
 import java.util.List;
 
-public class FaseDiurna{
+public class FaseDiurna implements Fase {
 
     private Urna urna;
     private SistemaNominaciones nominaciones;
+    private ResultadoDiurno resultado;
 
     public FaseDiurna() {
         this.urna = new Urna();
@@ -25,10 +30,6 @@ public class FaseDiurna{
     public FaseDiurna(Urna urna, SistemaNominaciones nominaciones) {
         this.urna = urna;
         this.nominaciones = nominaciones;
-    }
-
-    public FaseDiurna(Urna urna) {
-        this.urna = urna;
     }
 
     public void iniciarDebate(int tiempo) {
@@ -69,20 +70,33 @@ public class FaseDiurna{
 
 
 
-//    @Override
-//    public void ejecutar(Jugadores jugadores){
-//        iniciarDebate(120);
-//
-//        List<Jugador> listaJugadores = jugadores.vivos();
-//
-//        for ( j : listaJugadores) {
-//
-//            urna.registrarVoto( j, );
-//        }
-//    }
-};
+    @Override
+    public void ejecutar(Jugadores jugadores){
+        iniciarDebate(120);
 
-    /*@Override
-    public Ronda actualizar(Ronda ronda) {
+        List<Jugador> listaJugadores = jugadores.vivos();
+
+        for (Jugador j: listaJugadores) {
+            Jugador nominado = j.seleccionar(listaJugadores);
+            this.nominar(nominado);
+        }
+
+        List<Jugador> nominados = nominaciones.obtenerCandidatos();
+
+        for (Jugador j : listaJugadores) {
+            Jugador votado = j.seleccionar(nominados); // Esto si hay interfaz no se usa es temporal
+            this.votar( j, votado );
+        }
+
+        List<Voto> votos = urna.obtenerVotos();
+
+        this.eliminarAlMasVotado();
+        this.resultado = new ResultadoDiurno(votos, nominados);
+
+    }
+
+    @Override
+    public Ronda actualizar(Ronda ronda){
         return ronda.siguiente();
-    }*/
+    }
+}

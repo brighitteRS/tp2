@@ -9,6 +9,10 @@ public class ResultadoNocturno {
 
     private final List<Jugador> atacados = new ArrayList<>();
     private final List<Jugador> protegidos = new ArrayList<>();
+    private final List<Jugador> investigados = new ArrayList<>();
+    private final List<Jugador> victimas = new ArrayList<>();
+
+    public void registrarInvestigado(Jugador jugador) {investigados.add(jugador);}
 
     public void registrarAtaque(Jugador jugador) {
         atacados.add(jugador);
@@ -20,10 +24,12 @@ public class ResultadoNocturno {
 
     public void resolver() {
 
-        List<Jugador> victimas = new ArrayList<>(atacados);
+        List<Jugador> victimasFinales = new ArrayList<>(atacados);
 
-        victimas.removeAll(protegidos);
+        victimasFinales.removeAll(protegidos);
 
-        victimas.forEach(Jugador::eliminar);
+        victimas.addAll(victimasFinales);
+
+        victimasFinales.forEach(Jugador::eliminar);
     }
 }

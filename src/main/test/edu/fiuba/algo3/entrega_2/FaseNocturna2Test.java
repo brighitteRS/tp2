@@ -117,7 +117,7 @@ public class FaseNocturna2Test {
         FaseNocturna fase = new FaseNocturna();
 
         assertThrows(IllegalStateException.class,
-                () -> fase.ejecutar(jugadores));
+                () -> fase.ejecutar(jugadores,new Ronda(1)));
     }
 
     @Test
@@ -132,7 +132,7 @@ public class FaseNocturna2Test {
 
         FaseNocturna fase = new FaseNocturna();
 
-        fase.ejecutar(jugadores);
+        fase.ejecutar(jugadores,new Ronda(1));
 
         assertTrue(medico.estaVivo());
     }

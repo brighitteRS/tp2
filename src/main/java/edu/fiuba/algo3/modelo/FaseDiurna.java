@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Urna.Urna;
 
 import java.util.List;
 
-public class FaseDiurna implements Fase{
+public class FaseDiurna implements Fase {
 
     private Urna urna;
     private SistemaNominaciones nominaciones;
@@ -30,30 +30,27 @@ public class FaseDiurna implements Fase{
         this.urna = urna;
     }
 
-    public void iniciarDebate(int tiempo) {
-        // Aca se deberia mostrar el tiempo en la interfaz grafica y que se puedan comunicar los vivos
-    }
 
-    public void nominar( Jugador jugadorANominar ) {
-        if ( !jugadorANominar.estaVivo() ) {
+    public void nominar(Jugador jugadorANominar) {
+        if (!jugadorANominar.estaVivo()) {
             throw new IllegalArgumentException("No se puuede nominar a un jugador muerto");
         }
         nominaciones.agregarCandidato(jugadorANominar);
     }
 
     public void votar(Jugador votador, Jugador votado) {
-        if ( !votador.estaVivo() ){
+        if (!votador.estaVivo()) {
             throw new IllegalArgumentException("Un jugador muerto no puede votar");
-        } else if ( !nominaciones.esCandidato(votado) ) {
+        } else if (!nominaciones.esCandidato(votado)) {
             throw new IllegalArgumentException("No se pueden votar jugadores que no son candidatos durante la fase diurna");
         }
-        urna.registrarVoto( votador, votado );
+        urna.registrarVoto(votador, votado);
     }
 
-    public Jugador eliminarAlMasVotado(){
+    public Jugador eliminarAlMasVotado() {
         List<Jugador> ganadores = urna.getGanadores();
 
-        if ( ganadores.size() > 1  ) {
+        if (ganadores.size() > 1) {
             return null;
         }
 
@@ -66,9 +63,14 @@ public class FaseDiurna implements Fase{
         return nominaciones.obtenerCandidatos();
     }
 
-    /*@Override
-    public Ronda actualizar(Ronda ronda) {
-        return ronda.siguiente();
+    @Override
+    public void ejecutar(Jugadores jugadores) {
+
     }
 
-}*/
+    @Override
+    public Ronda actualizar(Ronda ronda) {
+        return null;
+    }
+}
+*/

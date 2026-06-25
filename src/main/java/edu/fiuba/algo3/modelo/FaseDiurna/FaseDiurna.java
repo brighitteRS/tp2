@@ -15,7 +15,6 @@ public class FaseDiurna implements Fase {
 
     private Urna urna;
     private SistemaNominaciones nominaciones;
-    private ResultadoDiurno resultado;
 
     public FaseDiurna() {
         this.urna = new Urna();
@@ -59,7 +58,7 @@ public class FaseDiurna implements Fase {
 
 
     @Override
-    public void ejecutar(Jugadores jugadores){
+    public void ejecutar(Jugadores jugadores, Ronda ronda){
         iniciarDebate(120);
 
         List<Jugador> listaJugadores = jugadores.vivos();
@@ -79,8 +78,7 @@ public class FaseDiurna implements Fase {
         List<Voto> votos = urna.obtenerVotos();
 
         this.eliminarAlMasVotado();
-        this.resultado = new ResultadoDiurno(votos, nominados);
-
+        ronda.registrarResultadoDiurno(new ResultadoDiurno(votos, nominados));
     }
 
     @Override

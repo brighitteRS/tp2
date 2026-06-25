@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.FaseDiurna.ResultadoDiurno;
 import edu.fiuba.algo3.modelo.FaseNocturna.ResultadoNocturno;
 
 public class Ronda {
@@ -11,7 +12,7 @@ public class Ronda {
     }
 
     private ResultadoNocturno resultadoNocturno;
-    //private ResultadoDiurno resultadoDia;
+    private ResultadoDiurno resultadoDia;
 
     public Ronda siguiente() {
         return new Ronda(numero + 1);
@@ -29,11 +30,10 @@ public class Ronda {
         return resultadoNocturno;
     }
 
-    /*public void registrarResultadoDiurno(ResultadoDiurno resultado) {
-        this.resultadoDiurno = resultado;
+    public void registrarResultadoDiurno(ResultadoDiurno resultado) {
+        this.resultadoDia = resultado;
     }
     public ResultadoDiurno obtenerResultadoDiurno() {
-        return resultadoDiurno;
+        return resultadoDia;
     }
-    */
 }

@@ -11,8 +11,4 @@ public class Ronda {
     public Ronda siguiente() {
         return new Ronda(numero + 1);
     }
-
-    public int numero() {
-        return numero;
-    }
 }

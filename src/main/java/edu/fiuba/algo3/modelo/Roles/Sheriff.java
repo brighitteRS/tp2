@@ -15,6 +15,7 @@ public class Sheriff extends Rol {
 
     @Override
     public Bando revelarBandoA(Jugador solicitante) {
-        return BandoNulo.INSTANCIA; //por ahora esta asi pero verlo
+        return BandoNulo.INSTANCIA;
+        //por ahora esta asi pero verlo
     }
 }

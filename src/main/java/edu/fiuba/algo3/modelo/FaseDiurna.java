@@ -3,8 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.FaseNocturna.FaseNocturna;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.NullPattern.JugadorNulo;
-import edu.fiuba.algo3.modelo.Urna.SistemaNominaciones;
-import edu.fiuba.algo3.modelo.Urna.Urna;
+import edu.fiuba.algo3.modelo.Urna.*;
 
 import java.util.List;
 
